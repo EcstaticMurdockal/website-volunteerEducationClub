@@ -341,33 +341,114 @@ const galleryData = [
     },
     {
         id: 4,
-        title: '虚拟形象',
+        title: '虚拟形象 1',
         description: '支教社吉祥物和虚拟形象设计',
         category: 'photo',
-        image: 'images/gallery/virtual-character.jpg',
+        image: 'images/gallery/virtual-character-1.jpg',
         likes: 0,
         showLike: false
     },
     {
         id: 5,
-        title: '信封和信纸',
-        description: '我们设计的支教主题信封和信纸',
+        title: '虚拟形象 2',
+        description: '支教社吉祥物和虚拟形象设计',
         category: 'photo',
-        image: 'images/gallery/envelope-letter.jpg',
+        image: 'images/gallery/virtual-character-2.jpg',
         likes: 0,
         showLike: false
     },
     {
         id: 6,
-        title: '明信片作品',
-        description: '我们设计的支教主题明信片',
+        title: '虚拟形象 3',
+        description: '支教社吉祥物和虚拟形象设计',
         category: 'photo',
-        image: 'images/gallery/postcard.jpg',
+        image: 'images/gallery/virtual-character-3.jpg',
         likes: 0,
         showLike: false
     },
     {
         id: 7,
+        title: '信封和信纸 1',
+        description: '我们设计的支教主题信封和信纸',
+        category: 'photo',
+        image: 'images/gallery/envelope-letter-1.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 8,
+        title: '信封和信纸 2',
+        description: '我们设计的支教主题信封和信纸',
+        category: 'photo',
+        image: 'images/gallery/envelope-letter-2.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 9,
+        title: '信封和信纸 3',
+        description: '我们设计的支教主题信封和信纸',
+        category: 'photo',
+        image: 'images/gallery/envelope-letter-3.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 10,
+        title: '明信片作品 1',
+        description: '我们设计的支教主题明信片',
+        category: 'photo',
+        image: 'images/gallery/postcard-1.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 11,
+        title: '明信片作品 2',
+        description: '我们设计的支教主题明信片',
+        category: 'photo',
+        image: 'images/gallery/postcard-2.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 12,
+        title: '明信片作品 3',
+        description: '我们设计的支教主题明信片',
+        category: 'photo',
+        image: 'images/gallery/postcard-3.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 13,
+        title: '书签作品 1',
+        description: '我们设计的支教主题书签',
+        category: 'photo',
+        image: 'images/gallery/bookmark-1.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 14,
+        title: '书签作品 2',
+        description: '我们设计的支教主题书签',
+        category: 'photo',
+        image: 'images/gallery/bookmark-2.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 15,
+        title: '书签作品 3',
+        description: '我们设计的支教主题书签',
+        category: 'photo',
+        image: 'images/gallery/bookmark-3.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 16,
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
         category: 'video',
@@ -377,7 +458,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 8,
+        id: 17,
         title: '2024支教纪录片',
         description: '记录2024年的支教故事',
         category: 'video',
@@ -387,7 +468,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 9,
+        id: 18,
         title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
@@ -397,7 +478,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 10,
+        id: 19,
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
         category: 'ppt',
@@ -407,7 +488,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 11,
+        id: 20,
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
         category: 'ppt',

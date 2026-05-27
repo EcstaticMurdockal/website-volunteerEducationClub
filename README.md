@@ -137,8 +137,14 @@ npx http-server -p 8000
 - [ ] `christmas.jpg` - 年终团建（圣诞）
 - [ ] `culture-month.jpg` - 社团文化月
 - [ ] `team-building.jpg` - 团建活动
-- [ ] `club-collaboration.jpg` - 社团联动（与天文社、排球社、辩论社、街舞社、绯青书画社）
 - [ ] `farewell.jpg` - 换届与告别会
+
+#### 社团联动照片（5个社团，分别命名）
+- [ ] `collaboration-astronomy.jpg` - 与天文社联动
+- [ ] `collaboration-volleyball.jpg` - 与排球社联动
+- [ ] `collaboration-debate.jpg` - 与辩论社联动
+- [ ] `collaboration-dance.jpg` - 与街舞社联动
+- [ ] `collaboration-art.jpg` - 与绯青书画社联动
 
 #### 平时支教活动照片（5张）
 - [ ] `weekly-teaching-1.jpg` - 支教活动照片1
@@ -147,16 +153,25 @@ npx http-server -p 8000
 - [ ] `weekly-teaching-4.jpg` - 支教活动照片4
 - [ ] `weekly-teaching-5.jpg` - 支教活动照片5
 
-#### Gallery照片 - 社团产品
+#### Gallery照片 - 社团产品（每个产品3张）
 - [ ] `group-photo-1.jpg` - 团队合照
 - [ ] `teaching-moment.jpg` - 支教课堂
 - [ ] `team-building.jpg` - 团建活动
-- [ ] `virtual-character.jpg` - 虚拟形象
-- [ ] `envelope-letter.jpg` - 信封和信纸
-- [ ] `postcard.jpg` - 明信片作品
+- [ ] `virtual-character-1.jpg` - 虚拟形象1
+- [ ] `virtual-character-2.jpg` - 虚拟形象2
+- [ ] `virtual-character-3.jpg` - 虚拟形象3
+- [ ] `envelope-letter-1.jpg` - 信封和信纸1
+- [ ] `envelope-letter-2.jpg` - 信封和信纸2
+- [ ] `envelope-letter-3.jpg` - 信封和信纸3
+- [ ] `postcard-1.jpg` - 明信片作品1
+- [ ] `postcard-2.jpg` - 明信片作品2
+- [ ] `postcard-3.jpg` - 明信片作品3
+- [ ] `bookmark-1.jpg` - 书签作品1
+- [ ] `bookmark-2.jpg` - 书签作品2
+- [ ] `bookmark-3.jpg` - 书签作品3
 
 #### 社团Icon
-- [ ] `icon.png` - 社团Logo图标（放在导航栏"深圳中学支教社"前面）
+- [x] `icon.png` - 社团Logo图标（已上传，显示在导航栏"深圳中学支教社"前面）
 
 #### 视频和PPT文件
 - [ ] `video-2025.mp4` + `video-2025-thumbnail.jpg` - 2025支教纪录片
