@@ -148,12 +148,29 @@ npx http-server -p 8000
 - [ ] `video-thumbnail.jpg` - 视频缩略图（JPG/PNG格式）
 - [ ] `ppt-thumbnail.jpg` - PPT缩略图（JPG/PNG格式）
 
+#### 视频和PPT文件
+- [ ] `video.mp4` - 支教纪录片视频（MP4格式）
+- [ ] `ppt.pdf` - 课程设计PPT（转换为PDF格式）
+
 **注意**：
 - 每个活动可以放置多张照片，只需按照命名规则添加即可（如`baituan-1.jpg`, `baituan-2.jpg`等）
-- **PPT和视频**：Gallery中只需要上传**缩略图**（JPG/PNG格式），不需要上传原始PPT或视频文件
-  - `video-thumbnail.jpg` - 视频的封面截图
-  - `ppt-thumbnail.jpg` - PPT的首页截图或代表性页面截图
-  - 点击缩略图后会显示大图，您可以在描述中添加B站链接或其他观看方式
+- **视频文件**：
+  - 格式：MP4（推荐H.264编码）
+  - 文件名：`video.mp4`
+  - 位置：`images/gallery/video.mp4`
+  - 缩略图：`video-thumbnail.jpg`（视频封面截图）
+  - 点击缩略图后会在网站内直接播放视频
+- **PPT文件**：
+  - 格式：PDF（需要先将PPT转换为PDF）
+  - 文件名：`ppt.pdf`
+  - 位置：`images/gallery/ppt.pdf`
+  - 缩略图：`ppt-thumbnail.jpg`（PPT首页截图）
+  - 点击缩略图后会在网站内直接查看PDF，并提供下载按钮
+
+**如何将PPT转换为PDF**：
+- Windows: 打开PPT → 文件 → 另存为 → 选择PDF格式
+- Mac: 打开PPT → 文件 → 导出 → 选择PDF格式
+- 在线工具: 使用 ilovepdf.com 或 smallpdf.com
 
 ## 🛠️ 技术栈
 

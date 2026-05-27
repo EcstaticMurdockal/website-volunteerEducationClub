@@ -359,6 +359,7 @@ const galleryData = [
         description: '记录我们的支教故事',
         category: 'video',
         image: 'images/gallery/video-thumbnail.jpg',
+        videoFile: 'images/gallery/video.mp4', // 视频文件路径
         likes: 0
     },
     {
@@ -367,6 +368,7 @@ const galleryData = [
         description: '创新教学方法分享',
         category: 'ppt',
         image: 'images/gallery/ppt-thumbnail.jpg',
+        pptFile: 'images/gallery/ppt.pdf', // PPT转PDF文件路径
         likes: 0
     }
 ];
@@ -469,12 +471,43 @@ function showGalleryModal(item) {
     document.getElementById('gallery-modal-title').textContent = item.title;
     const modalContent = document.getElementById('gallery-modal-content');
 
-    modalContent.innerHTML = `
-        <img src="${item.image}" alt="${item.title}" style="width: 100%; max-height: 70vh; object-fit: contain; border-radius: 8px;">
-        <p style="margin-top: 1rem; color: var(--text-light);">${item.description}</p>
-        <p style="margin-top: 0.5rem; color: var(--text-light);">类别: ${getCategoryName(item.category)}</p>
-    `;
+    let content = '';
 
+    if (item.category === 'video' && item.videoFile) {
+        // 视频播放器
+        content = `
+            <video controls style="width: 100%; max-height: 70vh; border-radius: 8px; background: #000;">
+                <source src="${item.videoFile}" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            <p style="margin-top: 1rem; color: var(--text-light);">${item.description}</p>
+        `;
+    } else if (item.category === 'ppt' && item.pptFile) {
+        // PDF查看器
+        content = `
+            <iframe src="${item.pptFile}" style="width: 100%; height: 70vh; border: none; border-radius: 8px;"></iframe>
+            <p style="margin-top: 1rem; color: var(--text-light);">${item.description}</p>
+            <a href="${item.pptFile}" download style="
+                display: inline-block;
+                margin-top: 1rem;
+                padding: 10px 20px;
+                background: var(--primary-color);
+                color: white;
+                text-decoration: none;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+            ">下载PDF</a>
+        `;
+    } else {
+        // 普通图片
+        content = `
+            <img src="${item.image}" alt="${item.title}" style="width: 100%; max-height: 70vh; object-fit: contain; border-radius: 8px;">
+            <p style="margin-top: 1rem; color: var(--text-light);">${item.description}</p>
+            <p style="margin-top: 0.5rem; color: var(--text-light);">类别: ${getCategoryName(item.category)}</p>
+        `;
+    }
+
+    modalContent.innerHTML = content;
     galleryModal.style.display = 'block';
 }
 
