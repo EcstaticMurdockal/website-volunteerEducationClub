@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深圳中学支教社</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">深圳中学支教社</div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link active">Home</a></li>
+                <li><a href="#activities" class="nav-link">Activities</a></li>
+                <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home 页面 -->
+    <section id="home" class="section active">
+        <div class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">深圳中学支教社</h1>
+                <p class="hero-subtitle">用知识点亮希望，以行动传递温暖</p>
+                <p class="hero-description">我们相信，每一次支教都是一颗种子，在孩子们心中播下梦想与希望</p>
+            </div>
+        </div>
+
+        <!-- 支教学校地图 -->
+        <div class="map-section">
+            <h2 class="section-title">我们的足迹</h2>
+            <div id="map"></div>
+            <div id="school-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close">&times;</span>
+                    <h3 id="modal-school-name"></h3>
+                    <div id="modal-school-images"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 社团历程时间线 -->
+        <div class="timeline-section">
+            <h2 class="section-title">我们的历程</h2>
+            <div class="timeline">
+                <div class="timeline-item" data-year="2020">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2020年</h3>
+                        <p>深圳中学支教社正式成立，首次前往粤北山区开展支教活动</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2021">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2021年</h3>
+                        <p>建立长期合作关系，开展暑期支教项目，惠及300余名学生</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2022">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2022年</h3>
+                        <p>拓展至5所合作学校，启动线上课程项目，突破地域限制</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2023">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2023年</h3>
+                        <p>社团规模扩大至80余人，累计支教时长超过2000小时</p>
+                    </div>
+                </div>
+                <div class="timeline-item" data-year="2025">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2025年</h3>
+                        <p>获得深圳市优秀社团称号，建立支教资源库和课程体系</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Activities 页面 -->
+    <section id="activities" class="section">
+        <div class="container">
+            <h2 class="section-title">我们的活动</h2>
+
+            <div class="activities-grid">
+                <!-- 活动内容待填充 -->
+            </div>
+
+            <div class="recruitment-section">
+                <h2 class="section-title">注意事项</h2>
+                <div class="recruitment-cards">
+                    <!-- 注意事项内容待填充 -->
+                </div>
+            </div>
+
+            <div class="quiz-section">
+                <h2 class="section-title">发现你的支教天赋</h2>
+                <p class="quiz-intro">完成这个有趣的测试，了解你最适合的支教角色和需要提升的能力</p>
+                <button id="start-quiz" class="btn-primary">开始测试</button>
+
+                <div id="quiz-container" class="quiz-container" style="display: none;">
+                    <div class="quiz-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill"></div>
+                        </div>
+                        <span class="progress-text">问题 <span id="current-question">1</span> / <span id="total-questions">10</span></span>
+                    </div>
+                    <div id="quiz-content"></div>
+                </div>
+
+                <div id="quiz-result" class="quiz-result" style="display: none;">
+                    <h3>你的支教人格：<span id="result-type"></span></h3>
+                    <div id="result-content"></div>
+                    <button id="restart-quiz" class="btn-secondary">重新测试</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery 页面 -->
+    <section id="gallery" class="section">
+        <div class="container">
+            <h2 class="section-title">精彩瞬间</h2>
+
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-category="all">全部</button>
+                <button class="gallery-tab" data-category="ppt">PPT作品</button>
+                <button class="gallery-tab" data-category="video">宣传视频</button>
+                <button class="gallery-tab" data-category="photo">活动照片</button>
+            </div>
+
+            <div class="gallery-grid" id="gallery-grid"></div>
+        </div>
+
+        <!-- Gallery Modal -->
+        <div id="gallery-modal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="gallery-close">&times;</span>
+                <h3 id="gallery-modal-title"></h3>
+                <div id="gallery-modal-content"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact 页面 -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">联系我们</h2>
+            <p class="contact-intro">关注我们，了解更多支教故事和活动信息</p>
+
+            <div class="contact-cards">
+                <div class="contact-card">
+                    <div class="contact-icon">📺</div>
+                    <h3>B站</h3>
+                    <p>@深圳中学支教社</p>
+                    <a href="#" class="btn-secondary">访问主页</a>
+                </div>
+                <div class="contact-card">
+                    <div class="contact-icon">💬</div>
+                    <h3>微信公众号</h3>
+                    <p>深圳中学支教社</p>
+                    <div class="qr-code">
+                        <div class="qr-placeholder">二维码</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="join-section">
+                <h3>加入我们</h3>
+                <p>如果你对支教充满热情，欢迎扫码关注公众号了解招新信息</p>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 深圳中学支教社 | 用心传递知识，用爱点亮未来</p>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="quiz.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
