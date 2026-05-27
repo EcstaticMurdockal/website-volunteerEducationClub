@@ -1484,9 +1484,14 @@ button:active, .btn-primary:active, .btn-secondary:active {
     border-radius: 12px;
 }
 
-/* 学校轮播确保图片完整填充 */
+/* 学校轮播确保图片完整显示不裁剪 */
+.school-carousel .carousel-track {
+    height: 350px;
+    background: var(--bg-light);
+}
+
 .school-carousel .carousel-slide img {
-    object-fit: cover;
+    object-fit: contain;
     object-position: center;
 }
 

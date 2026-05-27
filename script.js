@@ -809,7 +809,7 @@ window.showVideoModal = function(videoId) {
 
     modalTitle.textContent = video.title;
     modalContent.innerHTML = `
-        <video controls style="width: 100%; max-height: 70vh; border-radius: 8px; background: #000;">
+        <video controls style="width: 100%; max-height: 50vh; border-radius: 8px; background: #000;">
             <source src="${video.videoFile}" type="video/mp4">
             您的浏览器不支持视频播放。
         </video>
@@ -840,7 +840,7 @@ window.showPPTModal = function(pptId) {
 
     modalTitle.textContent = ppt.title;
     modalContent.innerHTML = `
-        <iframe src="${ppt.pptFile}" style="width: 100%; height: 70vh; border: none; border-radius: 8px;"></iframe>
+        <iframe src="${ppt.pptFile}" style="width: 100%; height: 50vh; border: none; border-radius: 8px;"></iframe>
         <p style="margin-top: 1rem; color: var(--text-light);">${ppt.description}</p>
         <div style="display: flex; gap: 1rem; margin-top: 1rem;">
             <button onclick="showPPTListModal()" style="
@@ -1044,11 +1044,33 @@ document.querySelectorAll('.recruitment-card, .gallery-item, .timeline-item, .ac
 
 // Activity照片点击放大功能
 function initActivityPhotoClick() {
+    // 移除所有旧的事件监听器，使用事件委托
+    const activitySection = document.getElementById('activities');
+    if (!activitySection) return;
+
+    // 移除旧的监听器（如果存在）
+    const oldHandler = activitySection._photoClickHandler;
+    if (oldHandler) {
+        activitySection.removeEventListener('click', oldHandler);
+    }
+
+    // 创建新的事件处理器
+    const newHandler = function(e) {
+        // 检查点击的是否是activity-photos-grid中的图片
+        if (e.target.tagName === 'IMG' && e.target.closest('.activity-photos-grid')) {
+            showActivityPhotoModal(e.target.src, e.target.alt);
+        }
+    };
+
+    // 保存处理器引用以便后续移除
+    activitySection._photoClickHandler = newHandler;
+
+    // 添加事件监听器
+    activitySection.addEventListener('click', newHandler);
+
+    // 设置图片样式
     document.querySelectorAll('.activity-photos-grid img').forEach(img => {
         img.style.cursor = 'pointer';
-        img.addEventListener('click', function() {
-            showActivityPhotoModal(this.src, this.alt);
-        });
     });
 }
 
