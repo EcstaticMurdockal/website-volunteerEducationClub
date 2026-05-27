@@ -2,9 +2,25 @@
 const hamburger = document.querySelector('.hamburger');
 const navMenu = document.querySelector('.nav-menu');
 const navLinks = document.querySelectorAll('.nav-link');
+const navbar = document.querySelector('.navbar');
+
+// Apple风格的导航栏滚动效果
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+
+    if (currentScroll > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+
+    lastScroll = currentScroll;
+});
 
 hamburger.addEventListener('click', () => {
     navMenu.classList.toggle('active');
+    hamburger.classList.toggle('active');
 });
 
 // 页面切换
@@ -31,13 +47,29 @@ navLinks.forEach(link => {
     });
 });
 
-// 地图功能 - 聚焦深圳罗湖区
-const map = L.map('map').setView([22.5569, 114.1216], 13);
+// 地图功能 - 完整的交互式地图
+const map = L.map('map', {
+    center: [22.5569, 114.1216],
+    zoom: 13,
+    zoomControl: true,
+    scrollWheelZoom: true,
+    dragging: true,
+    touchZoom: true,
+    doubleClickZoom: true,
+    boxZoom: true,
+    keyboard: true,
+    attributionControl: true
+});
 
+// 使用更清晰的地图样式
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors',
-    maxZoom: 19
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+    minZoom: 11
 }).addTo(map);
+
+// 添加缩放控制到右下角
+map.zoomControl.setPosition('bottomright');
 
 // 支教学校数据
 const schools = [
@@ -57,18 +89,47 @@ const schools = [
     }
 ];
 
+// 创建自定义图标
+const customIcon = L.divIcon({
+    className: 'custom-marker',
+    html: '<div class="marker-pin"></div><div class="marker-icon">🏫</div>',
+    iconSize: [30, 42],
+    iconAnchor: [15, 42],
+    popupAnchor: [0, -42]
+});
+
 // 添加学校标记
 schools.forEach(school => {
-    const marker = L.marker(school.coords).addTo(map);
-    marker.bindPopup(`
-        <div style="min-width: 200px;">
-            <h3 style="margin: 0 0 8px 0; color: var(--primary-color); font-size: 1.1rem;">${school.name}</h3>
-            <p style="margin: 0 0 8px 0; font-size: 0.9rem; color: #666;">${school.address}</p>
-            <p style="margin: 0; font-size: 0.85rem; color: #888;">${school.description}</p>
+    const marker = L.marker(school.coords, { icon: customIcon }).addTo(map);
+
+    // 创建弹窗内容
+    const popupContent = `
+        <div class="map-popup">
+            <h3 class="popup-title">${school.name}</h3>
+            <p class="popup-address">📍 ${school.address}</p>
+            <p class="popup-description">${school.description}</p>
+            <button class="popup-button" onclick="showSchoolDetails('${school.name}')">查看详情</button>
         </div>
-    `);
-    marker.on('click', () => showSchoolModal(school));
+    `;
+
+    marker.bindPopup(popupContent, {
+        maxWidth: 300,
+        className: 'custom-popup'
+    });
+
+    // 添加悬停效果
+    marker.on('mouseover', function() {
+        this.openPopup();
+    });
 });
+
+// 全局函数用于显示学校详情
+window.showSchoolDetails = function(schoolName) {
+    const school = schools.find(s => s.name === schoolName);
+    if (school) {
+        showSchoolModal(school);
+    }
+};
 
 // 模态框功能
 const modal = document.getElementById('school-modal');

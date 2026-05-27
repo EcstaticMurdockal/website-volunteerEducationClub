@@ -4,6 +4,13 @@
     box-sizing: border-box;
 }
 
+/* Apple风格的平滑滚动 */
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 :root {
     --primary-color: #68be8d;
     --secondary-color: #ebd842;
@@ -14,6 +21,8 @@
     --bg-white: #ffffff;
     --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.15);
+    --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 body {
@@ -26,7 +35,7 @@ body {
 
 /* 提升可访问性 */
 a, button {
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--transition-smooth);
 }
 
 a:focus, button:focus {
@@ -40,6 +49,16 @@ a:focus, button:focus {
     color: white;
 }
 
+/* Apple风格的按钮 */
+button, .btn-primary, .btn-secondary {
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+button:active, .btn-primary:active, .btn-secondary:active {
+    transform: scale(0.96);
+}
+
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -51,11 +70,17 @@ a:focus, button:focus {
     position: fixed;
     top: 0;
     width: 100%;
-    background: rgba(255, 255, 255, 0.95);
-    backdrop-filter: blur(10px);
-    box-shadow: var(--shadow);
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.05);
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: all 0.3s var(--transition-smooth);
+}
+
+.navbar.scrolled {
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .nav-container {
@@ -240,11 +265,126 @@ a:focus, button:focus {
 }
 
 #map {
-    height: 500px;
+    height: 600px;
     max-width: 1200px;
     margin: 0 auto;
-    border-radius: 12px;
-    box-shadow: var(--shadow-lg);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* 自定义地图标记 */
+.custom-marker {
+    background: none;
+    border: none;
+}
+
+.marker-pin {
+    width: 30px;
+    height: 30px;
+    border-radius: 50% 50% 50% 0;
+    background: var(--primary-color);
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 50%;
+    top: 50%;
+    margin: -15px 0 0 -15px;
+    box-shadow: 0 4px 12px rgba(104, 190, 141, 0.4);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.marker-pin::after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    margin: 5px 0 0 5px;
+    background: white;
+    position: absolute;
+    border-radius: 50%;
+}
+
+.marker-icon {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    font-size: 16px;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+}
+
+.custom-marker:hover .marker-pin {
+    transform: rotate(-45deg) scale(1.2);
+    box-shadow: 0 6px 20px rgba(104, 190, 141, 0.6);
+}
+
+/* 自定义弹窗样式 */
+.leaflet-popup-content-wrapper {
+    border-radius: 16px;
+    padding: 0;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+.leaflet-popup-content {
+    margin: 0;
+    min-width: 280px;
+}
+
+.map-popup {
+    padding: 1.5rem;
+}
+
+.popup-title {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0 0 0.8rem 0;
+}
+
+.popup-address {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    margin: 0 0 0.8rem 0;
+    line-height: 1.5;
+}
+
+.popup-description {
+    font-size: 0.85rem;
+    color: var(--text-light);
+    margin: 0 0 1rem 0;
+    line-height: 1.6;
+}
+
+.popup-button {
+    width: 100%;
+    padding: 0.75rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.popup-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(104, 190, 141, 0.4);
+}
+
+.popup-button:active {
+    transform: translateY(0);
+}
+
+.leaflet-popup-tip {
+    background: white;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.1);
 }
 
 /* 模态框 */
@@ -256,28 +396,31 @@ a:focus, button:focus {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
-    animation: fadeIn 0.3s ease;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    animation: fadeIn 0.3s var(--transition-smooth);
 }
 
 .modal-content {
     background: white;
     margin: 5% auto;
-    padding: 2rem;
+    padding: 2.5rem;
     width: 90%;
     max-width: 800px;
-    border-radius: 12px;
+    border-radius: 20px;
     position: relative;
-    animation: slideUp 0.3s ease;
+    animation: modalSlideUp 0.4s var(--transition-smooth);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
 }
 
-@keyframes slideUp {
+@keyframes modalSlideUp {
     from {
-        transform: translateY(50px);
+        transform: translateY(100px) scale(0.9);
         opacity: 0;
     }
     to {
-        transform: translateY(0);
+        transform: translateY(0) scale(1);
         opacity: 1;
     }
 }
@@ -289,11 +432,24 @@ a:focus, button:focus {
     font-size: 2rem;
     cursor: pointer;
     color: var(--text-light);
-    transition: color 0.3s ease;
+    transition: all 0.3s var(--transition-smooth);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: transparent;
 }
 
 .close:hover {
     color: var(--text-dark);
+    background: var(--bg-light);
+    transform: rotate(90deg);
+}
+
+.close:active {
+    transform: rotate(90deg) scale(0.9);
 }
 
 #modal-school-images {
@@ -427,16 +583,21 @@ a:focus, button:focus {
 
 .activity-card-large {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s var(--transition-smooth);
     cursor: pointer;
+    will-change: transform;
 }
 
 .activity-card-large:hover {
-    transform: translateY(-8px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.activity-card-large:active {
+    transform: translateY(-4px) scale(1.01);
 }
 
 .activity-image-placeholder {
@@ -450,11 +611,11 @@ a:focus, button:focus {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.3s ease;
+    transition: transform 0.6s var(--transition-smooth);
 }
 
 .activity-card-large:hover .activity-image-placeholder img {
-    transform: scale(1.05);
+    transform: scale(1.08);
 }
 
 .activity-info {
@@ -758,16 +919,21 @@ a:focus, button:focus {
 
 .gallery-item {
     background: white;
-    border-radius: 12px;
+    border-radius: 16px;
     overflow: hidden;
-    box-shadow: var(--shadow);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    transition: all 0.4s var(--transition-smooth);
     cursor: pointer;
+    will-change: transform;
 }
 
 .gallery-item:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-lg);
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12);
+}
+
+.gallery-item:active {
+    transform: translateY(-4px) scale(1.01);
 }
 
 .gallery-item:focus {
