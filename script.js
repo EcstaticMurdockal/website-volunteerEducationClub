@@ -504,52 +504,68 @@ const galleryData = [
         showLike: false,
         isProductEntry: true
     },
-    // 视频
+    // 视频入口
     {
         id: 5,
-        title: '2025支教纪录片',
-        description: '记录2025年的支教故事',
+        title: '🎬 宣传视频',
+        description: '查看支教纪录片和宣传视频（2个）',
         category: 'video',
         image: 'images/gallery/video-2025-thumbnail.jpg',
-        videoFile: 'images/gallery/video-2025.mp4',
-        showLike: true
+        showLike: false,
+        isVideoEntry: true
     },
+    // PPT入口
     {
         id: 6,
-        title: '2024支教纪录片',
-        description: '记录2024年的支教故事',
-        category: 'video',
-        image: 'images/gallery/video-2024-thumbnail.jpg',
-        videoFile: 'images/gallery/video-2024.mp4',
-        showLike: true
-    },
-    // PPT
-    {
-        id: 7,
-        title: '课程设计PPT 1',
-        description: '创新教学方法分享',
+        title: '📊 PPT作品',
+        description: '查看课程设计PPT（3个）',
         category: 'ppt',
         image: 'images/gallery/ppt-1-thumbnail.jpg',
-        pptFile: 'images/gallery/ppt-1.pdf',
-        showLike: true
+        showLike: false,
+        isPPTEntry: true
+    }
+];
+
+// 视频数据
+const videoData = [
+    {
+        id: 'video-1',
+        title: '2025支教纪录片',
+        description: '记录2025年的支教故事',
+        image: 'images/gallery/video-2025-thumbnail.jpg',
+        videoFile: 'images/gallery/video-2025.mp4'
     },
     {
-        id: 8,
+        id: 'video-2',
+        title: '2024支教纪录片',
+        description: '记录2024年的支教故事',
+        image: 'images/gallery/video-2024-thumbnail.jpg',
+        videoFile: 'images/gallery/video-2024.mp4'
+    }
+];
+
+// PPT数据
+const pptData = [
+    {
+        id: 'ppt-1',
+        title: '课程设计PPT 1',
+        description: '创新教学方法分享',
+        image: 'images/gallery/ppt-1-thumbnail.jpg',
+        pptFile: 'images/gallery/ppt-1.pdf'
+    },
+    {
+        id: 'ppt-2',
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
-        category: 'ppt',
         image: 'images/gallery/ppt-2-thumbnail.jpg',
-        pptFile: 'images/gallery/ppt-2.pdf',
-        showLike: true
+        pptFile: 'images/gallery/ppt-2.pdf'
     },
     {
-        id: 9,
+        id: 'ppt-3',
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
-        category: 'ppt',
         image: 'images/gallery/ppt-3-thumbnail.jpg',
-        pptFile: 'images/gallery/ppt-3.pdf',
-        showLike: true
+        pptFile: 'images/gallery/ppt-3.pdf'
     }
 ];
 
@@ -601,6 +617,10 @@ function renderGallery(category = 'all') {
             const galleryItem = galleryData.find(g => g.id === id);
             if (galleryItem.isProductEntry) {
                 showProductsModal();
+            } else if (galleryItem.isVideoEntry) {
+                showVideoListModal();
+            } else if (galleryItem.isPPTEntry) {
+                showPPTListModal();
             } else if (galleryItem.isGalleryEntry) {
                 showGalleryCarousel(galleryItem);
             } else {
@@ -729,6 +749,123 @@ function showProductsModal() {
 function closeProductsModal() {
     document.getElementById('products-modal').style.display = 'none';
 }
+
+// 视频列表 Modal 控制
+function showVideoListModal() {
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = '🎬 宣传视频';
+    modalContent.innerHTML = `
+        <div class="media-list-grid">
+            ${videoData.map(video => `
+                <div class="media-list-item" onclick="showVideoModal('${video.id}')">
+                    <img src="${video.image}" alt="${video.title}">
+                    <div class="media-list-info">
+                        <h4>${video.title}</h4>
+                        <p>${video.description}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    galleryModal.style.display = 'block';
+}
+
+// PPT列表 Modal 控制
+function showPPTListModal() {
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = '📊 PPT作品';
+    modalContent.innerHTML = `
+        <div class="media-list-grid">
+            ${pptData.map(ppt => `
+                <div class="media-list-item" onclick="showPPTModal('${ppt.id}')">
+                    <img src="${ppt.image}" alt="${ppt.title}">
+                    <div class="media-list-info">
+                        <h4>${ppt.title}</h4>
+                        <p>${ppt.description}</p>
+                    </div>
+                </div>
+            `).join('')}
+        </div>
+    `;
+
+    galleryModal.style.display = 'block';
+}
+
+// 显示单个视频
+window.showVideoModal = function(videoId) {
+    const video = videoData.find(v => v.id === videoId);
+    if (!video) return;
+
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = video.title;
+    modalContent.innerHTML = `
+        <video controls style="width: 100%; max-height: 70vh; border-radius: 8px; background: #000;">
+            <source src="${video.videoFile}" type="video/mp4">
+            您的浏览器不支持视频播放。
+        </video>
+        <p style="margin-top: 1rem; color: var(--text-light);">${video.description}</p>
+        <button onclick="showVideoListModal()" style="
+            margin-top: 1rem;
+            padding: 10px 20px;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        ">← 返回视频列表</button>
+    `;
+
+    galleryModal.style.display = 'block';
+};
+
+// 显示单个PPT
+window.showPPTModal = function(pptId) {
+    const ppt = pptData.find(p => p.id === pptId);
+    if (!ppt) return;
+
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = ppt.title;
+    modalContent.innerHTML = `
+        <iframe src="${ppt.pptFile}" style="width: 100%; height: 70vh; border: none; border-radius: 8px;"></iframe>
+        <p style="margin-top: 1rem; color: var(--text-light);">${ppt.description}</p>
+        <div style="display: flex; gap: 1rem; margin-top: 1rem;">
+            <button onclick="showPPTListModal()" style="
+                padding: 10px 20px;
+                background: var(--primary-color);
+                color: white;
+                border: none;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+            ">← 返回PPT列表</button>
+            <a href="${ppt.pptFile}" download style="
+                display: inline-block;
+                padding: 10px 20px;
+                background: var(--secondary-color);
+                color: var(--text-dark);
+                text-decoration: none;
+                border-radius: 6px;
+                transition: all 0.3s ease;
+            ">下载PDF</a>
+        </div>
+    `;
+
+    galleryModal.style.display = 'block';
+};
 
 // Gallery轮播 Modal 控制
 let galleryCarouselIndex = 0;
@@ -923,12 +1060,7 @@ function showActivityPhotoModal(src, alt) {
     modalTitle.textContent = alt || '活动照片';
     modalContent.innerHTML = `
         <div class="single-photo-view">
-            <img src="${src}" alt="${alt}" style="
-                width: 100%;
-                max-height: 80vh;
-                object-fit: contain;
-                border-radius: 12px;
-            ">
+            <img src="${src}" alt="${alt}">
         </div>
     `;
 
