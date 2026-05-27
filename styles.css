@@ -391,49 +391,137 @@ a:focus, button:focus {
     padding-bottom: 4rem;
 }
 
-.activities-grid {
+.subsection-title {
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.activities-section {
+    margin-bottom: 3rem;
+}
+
+.activities-timeline {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
-    margin-bottom: 4rem;
     padding: 0 2rem;
 }
 
-.activity-card {
+.activity-item {
+    position: relative;
+}
+
+.activity-month {
+    display: inline-block;
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.activity-card-large {
     background: white;
-    padding: 2rem;
     border-radius: 12px;
-    text-align: center;
+    overflow: hidden;
     box-shadow: var(--shadow);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     cursor: pointer;
 }
 
-.activity-card:hover {
-    transform: translateY(-10px);
+.activity-card-large:hover {
+    transform: translateY(-8px);
     box-shadow: var(--shadow-lg);
 }
 
-.activity-card:focus-within {
-    outline: 2px solid var(--primary-color);
-    outline-offset: 2px;
+.activity-image-placeholder {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: var(--bg-light);
 }
 
-.activity-icon {
+.activity-image-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.activity-card-large:hover .activity-image-placeholder img {
+    transform: scale(1.05);
+}
+
+.activity-info {
+    padding: 1.5rem;
+}
+
+.activity-info h4 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+}
+
+.activity-info p {
+    color: var(--text-light);
+    line-height: 1.6;
+}
+
+/* 日常活动 */
+.regular-activities {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    padding: 0 2rem;
+}
+
+.regular-activity-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+    border-left: 4px solid var(--accent-color);
+}
+
+.regular-activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+}
+
+.regular-icon {
     font-size: 3rem;
     margin-bottom: 1rem;
 }
 
-.activity-card h3 {
+.regular-activity-card h4 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-weight: 600;
     font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 0.8rem;
 }
 
-.activity-card p {
+.regular-activity-card p {
     color: var(--text-light);
     line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.frequency-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
 .recruitment-section {
@@ -593,20 +681,18 @@ a:focus, button:focus {
 
 .quiz-result {
     background: white;
-    padding: 2rem;
+    padding: 3rem 2rem;
     border-radius: 12px;
     box-shadow: var(--shadow-lg);
     text-align: center;
 }
 
 .quiz-result h3 {
-    font-size: 2rem;
-    color: var(--primary-color);
     margin-bottom: 2rem;
 }
 
 #result-type {
-    color: var(--secondary-color);
+    margin-bottom: 2rem;
 }
 
 .result-section {

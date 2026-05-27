@@ -31,46 +31,42 @@ navLinks.forEach(link => {
     });
 });
 
-// 地图功能
-const map = L.map('map').setView([23.5, 114.5], 7);
+// 地图功能 - 聚焦深圳罗湖区
+const map = L.map('map').setView([22.5569, 114.1216], 13);
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© OpenStreetMap contributors'
+    attribution: '© OpenStreetMap contributors',
+    maxZoom: 19
 }).addTo(map);
 
 // 支教学校数据
 const schools = [
     {
-        name: '连平县上坪中学',
-        coords: [24.3719, 114.4897],
-        images: ['https://via.placeholder.com/300x200?text=上坪中学1', 'https://via.placeholder.com/300x200?text=上坪中学2']
+        name: '深圳市凤光小学',
+        address: '广东省深圳市罗湖区泥岗西路40号1栋',
+        coords: [22.5669, 114.1216],
+        images: ['images/schools/fengguang-1.jpg', 'images/schools/fengguang-2.jpg'],
+        description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
     },
     {
-        name: '河源市龙川县第一中学',
-        coords: [24.0996, 115.2597],
-        images: ['https://via.placeholder.com/300x200?text=龙川一中1', 'https://via.placeholder.com/300x200?text=龙川一中2']
-    },
-    {
-        name: '韶关市乳源县民族实验学校',
-        coords: [24.7764, 113.2755],
-        images: ['https://via.placeholder.com/300x200?text=乳源学校1', 'https://via.placeholder.com/300x200?text=乳源学校2']
-    },
-    {
-        name: '梅州市五华县水寨中学',
-        coords: [23.9324, 115.7753],
-        images: ['https://via.placeholder.com/300x200?text=水寨中学1', 'https://via.placeholder.com/300x200?text=水寨中学2']
-    },
-    {
-        name: '清远市连南县民族高级中学',
-        coords: [24.7264, 112.2877],
-        images: ['https://via.placeholder.com/300x200?text=连南高中1', 'https://via.placeholder.com/300x200?text=连南高中2']
+        name: '深圳市北斗小学',
+        address: '广东省深圳市罗湖区春风路1016号（文锦地铁站C口步行340米）',
+        coords: [22.5469, 114.1316],
+        images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg'],
+        description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
     }
 ];
 
 // 添加学校标记
 schools.forEach(school => {
     const marker = L.marker(school.coords).addTo(map);
-    marker.bindPopup(`<b>${school.name}</b><br>点击查看更多`);
+    marker.bindPopup(`
+        <div style="min-width: 200px;">
+            <h3 style="margin: 0 0 8px 0; color: var(--primary-color); font-size: 1.1rem;">${school.name}</h3>
+            <p style="margin: 0 0 8px 0; font-size: 0.9rem; color: #666;">${school.address}</p>
+            <p style="margin: 0; font-size: 0.85rem; color: #888;">${school.description}</p>
+        </div>
+    `);
     marker.on('click', () => showSchoolModal(school));
 });
 
@@ -80,10 +76,16 @@ const closeBtn = document.querySelector('.close');
 
 function showSchoolModal(school) {
     document.getElementById('modal-school-name').textContent = school.name;
-    const imagesContainer = document.getElementById('modal-school-images');
-    imagesContainer.innerHTML = school.images.map(img =>
-        `<img src="${img}" alt="${school.name}">`
-    ).join('');
+    const modalBody = document.getElementById('modal-school-images');
+    modalBody.innerHTML = `
+        <p style="color: var(--text-light); margin-bottom: 1rem; line-height: 1.6;">
+            <strong>地址：</strong>${school.address}<br>
+            <strong>活动：</strong>${school.description}
+        </p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            ${school.images.map(img => `<img src="${img}" alt="${school.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`).join('')}
+        </div>
+    `;
     modal.style.display = 'block';
 }
 
@@ -187,9 +189,12 @@ function showResult() {
     const { type, scores } = calculatePersonality(userAnswers);
     const result = personalityTypes[type];
 
-    document.getElementById('result-type').textContent = `${result.icon} ${result.title}`;
+    document.getElementById('result-type').innerHTML = `
+        <div style="font-size: 4rem; margin-bottom: 1rem;">${result.icon}</div>
+        <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">${result.title}</div>
+    `;
     document.getElementById('result-content').innerHTML = `
-        <p style="font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.8;">${result.description}</p>
+        <p style="font-size: 1.2rem; margin-bottom: 3rem; line-height: 1.8; color: var(--text-dark); font-weight: 500;">${result.description}</p>
 
         <div class="result-section">
             <h4>✨ 你的天赋优势</h4>
@@ -211,16 +216,6 @@ function showResult() {
                 ${result.tips.map(t => `<li>${t}</li>`).join('')}
             </ul>
         </div>
-
-        <div class="result-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-            <h4 style="color: white;">🎯 你的人格代码：${type}</h4>
-            <p style="margin-top: 1rem; opacity: 0.9;">
-                ${type[0] === 'S' ? '结构化' : '灵活'} ·
-                ${type[1] === 'G' ? '引导型' : '陪伴型'} ·
-                ${type[2] === 'K' ? '知识导向' : '情感导向'} ·
-                ${type[3] === 'P' ? '计划型' : '即兴型'}
-            </p>
-        </div>
     `;
 }
 
@@ -235,74 +230,50 @@ function resetQuiz() {
 const galleryData = [
     {
         id: 1,
-        title: '支教课程设计PPT',
-        description: '创新教学方法分享',
-        category: 'ppt',
-        image: 'https://via.placeholder.com/400x300?text=PPT+1',
-        likes: 42
-    },
-    {
-        id: 2,
-        title: '暑期支教纪录片',
-        description: '记录我们的支教故事',
-        category: 'video',
-        image: 'https://via.placeholder.com/400x300?text=Video+1',
-        likes: 89
-    },
-    {
-        id: 3,
-        title: '课堂互动瞬间',
-        description: '孩子们的笑容是最好的回报',
+        title: '团队合照',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'https://via.placeholder.com/400x300?text=Photo+1',
+        image: 'images/gallery/group-photo-1.jpg',
         likes: 156
     },
     {
+        id: 2,
+        title: '支教课堂',
+        description: '与学生们的互动瞬间',
+        category: 'photo',
+        image: 'images/gallery/teaching-moment.jpg',
+        likes: 142
+    },
+    {
+        id: 3,
+        title: '百团大战',
+        description: '社团招新现场',
+        category: 'photo',
+        image: 'images/gallery/recruitment.jpg',
+        likes: 128
+    },
+    {
         id: 4,
-        title: '科学实验课PPT',
-        description: '让科学变得有趣',
-        category: 'ppt',
-        image: 'https://via.placeholder.com/400x300?text=PPT+2',
-        likes: 67
-    },
-    {
-        id: 5,
-        title: '支教社招新宣传片',
-        description: '加入我们，一起传递温暖',
-        category: 'video',
-        image: 'https://via.placeholder.com/400x300?text=Video+2',
-        likes: 123
-    },
-    {
-        id: 6,
-        title: '团队合影',
-        description: '春季支教团队',
+        title: '团建活动',
+        description: '社员们的欢乐时光',
         category: 'photo',
-        image: 'https://via.placeholder.com/400x300?text=Photo+2',
-        likes: 201
-    },
-    {
-        id: 7,
-        title: '英语趣味教学PPT',
-        description: '用游戏学英语',
-        category: 'ppt',
-        image: 'https://via.placeholder.com/400x300?text=PPT+3',
-        likes: 78
-    },
-    {
-        id: 8,
-        title: '山区学校环境记录',
-        description: '我们去过的地方',
-        category: 'photo',
-        image: 'https://via.placeholder.com/400x300?text=Photo+3',
+        image: 'images/gallery/team-building.jpg',
         likes: 134
     },
     {
-        id: 9,
-        title: '支教心得分享会',
-        description: '听听学长学姐的故事',
+        id: 5,
+        title: '支教纪录片',
+        description: '记录我们的支教故事',
         category: 'video',
-        image: 'https://via.placeholder.com/400x300?text=Video+3',
+        image: 'images/gallery/video-thumbnail.jpg',
+        likes: 189
+    },
+    {
+        id: 6,
+        title: '课程设计PPT',
+        description: '创新教学方法分享',
+        category: 'ppt',
+        image: 'images/gallery/ppt-thumbnail.jpg',
         likes: 95
     }
 ];
@@ -318,7 +289,10 @@ function renderGallery(category = 'all') {
 
     galleryGrid.innerHTML = filteredData.map(item => `
         <div class="gallery-item" data-id="${item.id}">
-            <img src="${item.image}" alt="${item.title}" class="gallery-item-image">
+            <img src="${item.image}"
+                 alt="${item.title}"
+                 class="gallery-item-image"
+                 onerror="this.src='https://via.placeholder.com/400x300?text=${encodeURIComponent(item.title)}'">
             <div class="gallery-item-content">
                 <h3 class="gallery-item-title">${item.title}</h3>
                 <p class="gallery-item-description">${item.description}</p>
@@ -436,7 +410,7 @@ const observer = new IntersectionObserver((entries) => {
 }, observerOptions);
 
 // 观察所有需要动画的元素
-document.querySelectorAll('.activity-card, .recruitment-card, .gallery-item, .timeline-item').forEach(el => {
+document.querySelectorAll('.recruitment-card, .gallery-item, .timeline-item, .activity-card-large, .regular-activity-card').forEach(el => {
     if (!el.classList.contains('timeline-item')) {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
