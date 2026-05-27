@@ -48,88 +48,107 @@ navLinks.forEach(link => {
 });
 
 // 地图功能 - 完整的交互式地图
-const map = L.map('map', {
-    center: [22.5569, 114.1216],
-    zoom: 13,
-    zoomControl: true,
-    scrollWheelZoom: true,
-    dragging: true,
-    touchZoom: true,
-    doubleClickZoom: true,
-    boxZoom: true,
-    keyboard: true,
-    attributionControl: true
+// 等待页面加载完成后初始化地图
+document.addEventListener('DOMContentLoaded', function() {
+    initMap();
 });
 
-// 使用更清晰的地图样式
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19,
-    minZoom: 11
-}).addTo(map);
-
-// 添加缩放控制到右下角
-map.zoomControl.setPosition('bottomright');
-
-// 支教学校数据
-const schools = [
-    {
-        name: '深圳市凤光小学',
-        address: '广东省深圳市罗湖区泥岗西路40号1栋',
-        coords: [22.5669, 114.1216],
-        images: ['images/schools/fengguang-1.jpg', 'images/schools/fengguang-2.jpg'],
-        description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
-    },
-    {
-        name: '深圳市北斗小学',
-        address: '广东省深圳市罗湖区春风路1016号（文锦地铁站C口步行340米）',
-        coords: [22.5469, 114.1316],
-        images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg'],
-        description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
+function initMap() {
+    // 检查地图容器是否存在
+    const mapContainer = document.getElementById('map');
+    if (!mapContainer) {
+        console.error('地图容器未找到');
+        return;
     }
-];
 
-// 创建自定义图标
-const customIcon = L.divIcon({
-    className: 'custom-marker',
-    html: '<div class="marker-pin"></div><div class="marker-icon">🏫</div>',
-    iconSize: [30, 42],
-    iconAnchor: [15, 42],
-    popupAnchor: [0, -42]
-});
-
-// 添加学校标记
-schools.forEach(school => {
-    const marker = L.marker(school.coords, { icon: customIcon }).addTo(map);
-
-    // 创建弹窗内容
-    const popupContent = `
-        <div class="map-popup">
-            <h3 class="popup-title">${school.name}</h3>
-            <p class="popup-address">📍 ${school.address}</p>
-            <p class="popup-description">${school.description}</p>
-            <button class="popup-button" onclick="showSchoolDetails('${school.name}')">查看详情</button>
-        </div>
-    `;
-
-    marker.bindPopup(popupContent, {
-        maxWidth: 300,
-        className: 'custom-popup'
+    const map = L.map('map', {
+        center: [22.5569, 114.1216],
+        zoom: 13,
+        zoomControl: true,
+        scrollWheelZoom: true,
+        dragging: true,
+        touchZoom: true,
+        doubleClickZoom: true,
+        boxZoom: true,
+        keyboard: true,
+        attributionControl: true
     });
 
-    // 添加悬停效果
-    marker.on('mouseover', function() {
-        this.openPopup();
-    });
-});
+    // 使用更清晰的地图样式
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
+        minZoom: 11
+    }).addTo(map);
 
-// 全局函数用于显示学校详情
-window.showSchoolDetails = function(schoolName) {
-    const school = schools.find(s => s.name === schoolName);
-    if (school) {
-        showSchoolModal(school);
-    }
-};
+    // 添加缩放控制到右下角
+    map.zoomControl.setPosition('bottomright');
+
+    // 支教学校数据
+    const schools = [
+        {
+            name: '深圳市凤光小学',
+            address: '广东省深圳市罗湖区泥岗西路40号1栋',
+            coords: [22.5669, 114.1216],
+            images: ['images/schools/fengguang-1.jpg', 'images/schools/fengguang-2.jpg'],
+            description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
+        },
+        {
+            name: '深圳市北斗小学',
+            address: '广东省深圳市罗湖区春风路1016号（文锦地铁站C口步行340米）',
+            coords: [22.5469, 114.1316],
+            images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg'],
+            description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
+        }
+    ];
+
+    // 创建自定义图标
+    const customIcon = L.divIcon({
+        className: 'custom-marker',
+        html: '<div class="marker-pin"></div><div class="marker-icon">🏫</div>',
+        iconSize: [30, 42],
+        iconAnchor: [15, 42],
+        popupAnchor: [0, -42]
+    });
+
+    // 添加学校标记
+    schools.forEach(school => {
+        const marker = L.marker(school.coords, { icon: customIcon }).addTo(map);
+
+        // 创建弹窗内容
+        const popupContent = `
+            <div class="map-popup">
+                <h3 class="popup-title">${school.name}</h3>
+                <p class="popup-address">📍 ${school.address}</p>
+                <p class="popup-description">${school.description}</p>
+                <button class="popup-button" onclick="showSchoolDetails('${school.name}')">查看详情</button>
+            </div>
+        `;
+
+        marker.bindPopup(popupContent, {
+            maxWidth: 300,
+            className: 'custom-popup'
+        });
+
+        // 添加悬停效果
+        marker.on('mouseover', function() {
+            this.openPopup();
+        });
+    });
+
+    // 全局函数用于显示学校详情
+    window.showSchoolDetails = function(schoolName) {
+        const school = schools.find(s => s.name === schoolName);
+        if (school) {
+            showSchoolModal(school);
+        }
+    };
+
+    // 确保地图正确渲染
+    setTimeout(() => {
+        map.invalidateSize();
+    }, 100);
+}
 
 // 模态框功能
 const modal = document.getElementById('school-modal');
@@ -295,7 +314,7 @@ const galleryData = [
         description: '支教社全体成员合影',
         category: 'photo',
         image: 'images/gallery/group-photo-1.jpg',
-        likes: 156
+        likes: 0
     },
     {
         id: 2,
@@ -303,7 +322,7 @@ const galleryData = [
         description: '与学生们的互动瞬间',
         category: 'photo',
         image: 'images/gallery/teaching-moment.jpg',
-        likes: 142
+        likes: 0
     },
     {
         id: 3,
@@ -311,7 +330,7 @@ const galleryData = [
         description: '社团招新现场',
         category: 'photo',
         image: 'images/gallery/recruitment.jpg',
-        likes: 128
+        likes: 0
     },
     {
         id: 4,
@@ -319,7 +338,7 @@ const galleryData = [
         description: '社员们的欢乐时光',
         category: 'photo',
         image: 'images/gallery/team-building.jpg',
-        likes: 134
+        likes: 0
     },
     {
         id: 5,
@@ -327,7 +346,7 @@ const galleryData = [
         description: '记录我们的支教故事',
         category: 'video',
         image: 'images/gallery/video-thumbnail.jpg',
-        likes: 189
+        likes: 0
     },
     {
         id: 6,
@@ -335,12 +354,13 @@ const galleryData = [
         description: '创新教学方法分享',
         category: 'ppt',
         image: 'images/gallery/ppt-thumbnail.jpg',
-        likes: 95
+        likes: 0
     }
 ];
 
 // 从localStorage加载点赞数据
 const likedItems = JSON.parse(localStorage.getItem('likedItems') || '{}');
+const likeCounts = JSON.parse(localStorage.getItem('likeCounts') || '{}');
 
 function renderGallery(category = 'all') {
     const galleryGrid = document.getElementById('gallery-grid');
@@ -361,7 +381,7 @@ function renderGallery(category = 'all') {
                     <span class="gallery-item-category">${getCategoryName(item.category)}</span>
                     <button class="like-button ${likedItems[item.id] ? 'liked' : ''}" data-id="${item.id}">
                         <span class="heart">${likedItems[item.id] ? '❤️' : '🤍'}</span>
-                        <span class="like-count">${item.likes + (likedItems[item.id] ? 1 : 0)}</span>
+                        <span class="like-count">${(likeCounts[item.id] || 0)}</span>
                     </button>
                 </div>
             </div>
@@ -401,18 +421,22 @@ function toggleLike(id, button) {
     const count = button.querySelector('.like-count');
 
     if (likedItems[id]) {
+        // 取消点赞
         delete likedItems[id];
         button.classList.remove('liked');
         heart.textContent = '🤍';
-        count.textContent = parseInt(count.textContent) - 1;
+        likeCounts[id] = Math.max(0, (likeCounts[id] || 0) - 1);
     } else {
+        // 点赞
         likedItems[id] = true;
         button.classList.add('liked');
         heart.textContent = '❤️';
-        count.textContent = parseInt(count.textContent) + 1;
+        likeCounts[id] = (likeCounts[id] || 0) + 1;
     }
 
+    count.textContent = likeCounts[id];
     localStorage.setItem('likedItems', JSON.stringify(likedItems));
+    localStorage.setItem('likeCounts', JSON.stringify(likeCounts));
 }
 
 // Gallery标签切换
