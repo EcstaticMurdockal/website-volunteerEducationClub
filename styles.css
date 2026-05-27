@@ -93,10 +93,28 @@ button:active, .btn-primary:active, .btn-secondary:active {
 }
 
 .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: bold;
     color: var(--primary-color);
     cursor: pointer;
+}
+
+.logo-icon {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    transition: transform 0.3s var(--transition-smooth);
+}
+
+.logo:hover .logo-icon {
+    transform: scale(1.1);
+}
+
+.logo-text {
+    transition: color 0.3s ease;
 }
 
 .nav-menu {

@@ -131,26 +131,32 @@ npx http-server -p 8000
 - [ ] `beidou-2.jpg` - 北斗小学照片2
 - [ ] `beidou-3.jpg` - 北斗小学照片3
 
-#### 活动照片（5张）
+#### 活动照片
 - [ ] `first-class.jpg` - 第一节社课
 - [ ] `baituan.jpg` - 百团大战
 - [ ] `christmas.jpg` - 年终团建（圣诞）
 - [ ] `culture-month.jpg` - 社团文化月
 - [ ] `team-building.jpg` - 团建活动
-- [ ] `club-collaboration.jpg` - 社团联动
+- [ ] `club-collaboration.jpg` - 社团联动（与天文社、排球社、辩论社、街舞社、绯青书画社）
 - [ ] `farewell.jpg` - 换届与告别会
 
-#### 平时支教活动照片（3张）
+#### 平时支教活动照片（5张）
 - [ ] `weekly-teaching-1.jpg` - 支教活动照片1
 - [ ] `weekly-teaching-2.jpg` - 支教活动照片2
 - [ ] `weekly-teaching-3.jpg` - 支教活动照片3
+- [ ] `weekly-teaching-4.jpg` - 支教活动照片4
+- [ ] `weekly-teaching-5.jpg` - 支教活动照片5
 
-#### Gallery照片（5张）
+#### Gallery照片 - 社团产品
 - [ ] `group-photo-1.jpg` - 团队合照
 - [ ] `teaching-moment.jpg` - 支教课堂
 - [ ] `team-building.jpg` - 团建活动
+- [ ] `virtual-character.jpg` - 虚拟形象
+- [ ] `envelope-letter.jpg` - 信封和信纸
 - [ ] `postcard.jpg` - 明信片作品
-- [ ] `virtual-character.jpg` - 虚拟人物设计
+
+#### 社团Icon
+- [ ] `icon.png` - 社团Logo图标（放在导航栏"深圳中学支教社"前面）
 
 #### 视频和PPT文件
 - [ ] `video-2025.mp4` + `video-2025-thumbnail.jpg` - 2025支教纪录片

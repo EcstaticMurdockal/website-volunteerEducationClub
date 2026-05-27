@@ -341,6 +341,24 @@ const galleryData = [
     },
     {
         id: 4,
+        title: '虚拟形象',
+        description: '支教社吉祥物和虚拟形象设计',
+        category: 'photo',
+        image: 'images/gallery/virtual-character.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 5,
+        title: '信封和信纸',
+        description: '我们设计的支教主题信封和信纸',
+        category: 'photo',
+        image: 'images/gallery/envelope-letter.jpg',
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 6,
         title: '明信片作品',
         description: '我们设计的支教主题明信片',
         category: 'photo',
@@ -349,16 +367,7 @@ const galleryData = [
         showLike: false
     },
     {
-        id: 5,
-        title: '虚拟人物设计',
-        description: '支教社吉祥物和虚拟形象',
-        category: 'photo',
-        image: 'images/gallery/virtual-character.jpg',
-        likes: 0,
-        showLike: false
-    },
-    {
-        id: 6,
+        id: 7,
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
         category: 'video',
@@ -368,7 +377,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 7,
+        id: 8,
         title: '2024支教纪录片',
         description: '记录2024年的支教故事',
         category: 'video',
@@ -378,7 +387,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 8,
+        id: 9,
         title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
@@ -388,7 +397,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 9,
+        id: 10,
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
         category: 'ppt',
@@ -398,7 +407,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 10,
+        id: 11,
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
         category: 'ppt',
