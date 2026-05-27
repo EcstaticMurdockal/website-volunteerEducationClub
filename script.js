@@ -318,7 +318,8 @@ const galleryData = [
         description: '支教社全体成员合影',
         category: 'photo',
         image: 'images/gallery/group-photo-1.jpg',
-        likes: 0
+        likes: 0,
+        showLike: false
     },
     {
         id: 2,
@@ -326,59 +327,85 @@ const galleryData = [
         description: '与学生们的互动瞬间',
         category: 'photo',
         image: 'images/gallery/teaching-moment.jpg',
-        likes: 0
+        likes: 0,
+        showLike: false
     },
     {
         id: 3,
-        title: '百团大战',
-        description: '社团招新现场',
-        category: 'photo',
-        image: 'images/gallery/recruitment.jpg',
-        likes: 0
-    },
-    {
-        id: 4,
         title: '团建活动',
         description: '社员们的欢乐时光',
         category: 'photo',
         image: 'images/gallery/team-building.jpg',
-        likes: 0
+        likes: 0,
+        showLike: false
+    },
+    {
+        id: 4,
+        title: '明信片作品',
+        description: '我们设计的支教主题明信片',
+        category: 'photo',
+        image: 'images/gallery/postcard.jpg',
+        likes: 0,
+        showLike: false
     },
     {
         id: 5,
-        title: '支教纪录片',
-        description: '记录我们的支教故事',
-        category: 'video',
-        image: 'images/gallery/video-thumbnail.jpg',
-        videoFile: 'images/gallery/video.mp4', // 视频文件路径
-        likes: 0
+        title: '虚拟人物设计',
+        description: '支教社吉祥物和虚拟形象',
+        category: 'photo',
+        image: 'images/gallery/virtual-character.jpg',
+        likes: 0,
+        showLike: false
     },
     {
         id: 6,
+        title: '2025支教纪录片',
+        description: '记录2025年的支教故事',
+        category: 'video',
+        image: 'images/gallery/video-2025-thumbnail.jpg',
+        videoFile: 'images/gallery/video-2025.mp4',
+        likes: 0,
+        showLike: true
+    },
+    {
+        id: 7,
+        title: '2024支教纪录片',
+        description: '记录2024年的支教故事',
+        category: 'video',
+        image: 'images/gallery/video-2024-thumbnail.jpg',
+        videoFile: 'images/gallery/video-2024.mp4',
+        likes: 0,
+        showLike: true
+    },
+    {
+        id: 8,
         title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
         image: 'images/gallery/ppt-1-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-1.pdf',
-        likes: 0
+        likes: 0,
+        showLike: true
     },
     {
-        id: 7,
+        id: 9,
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
         category: 'ppt',
         image: 'images/gallery/ppt-2-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-2.pdf',
-        likes: 0
+        likes: 0,
+        showLike: true
     },
     {
-        id: 8,
+        id: 10,
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
         category: 'ppt',
         image: 'images/gallery/ppt-3-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-3.pdf',
-        likes: 0
+        likes: 0,
+        showLike: true
     }
 ];
 
@@ -403,10 +430,12 @@ function renderGallery(category = 'all') {
                 <p class="gallery-item-description">${item.description}</p>
                 <div class="gallery-item-footer">
                     <span class="gallery-item-category">${getCategoryName(item.category)}</span>
-                    <button class="like-button ${likedItems[item.id] ? 'liked' : ''}" data-id="${item.id}">
-                        <span class="heart">${likedItems[item.id] ? '❤️' : '🤍'}</span>
-                        <span class="like-count">${(likeCounts[item.id] || 0)}</span>
-                    </button>
+                    ${item.showLike ? `
+                        <button class="like-button ${likedItems[item.id] ? 'liked' : ''}" data-id="${item.id}">
+                            <span class="heart">${likedItems[item.id] ? '❤️' : '🤍'}</span>
+                            <span class="like-count">${(likeCounts[item.id] || 0)}</span>
+                        </button>
+                    ` : ''}
                 </div>
             </div>
         </div>

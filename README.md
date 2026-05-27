@@ -131,47 +131,51 @@ npx http-server -p 8000
 - [ ] `beidou-2.jpg` - 北斗小学照片2
 - [ ] `beidou-3.jpg` - 北斗小学照片3
 
-#### 活动照片（7张）
+#### 活动照片（5张）
 - [ ] `first-class.jpg` - 第一节社课
 - [ ] `baituan.jpg` - 百团大战
 - [ ] `christmas.jpg` - 年终团建（圣诞）
 - [ ] `culture-month.jpg` - 社团文化月
-- [ ] `mid-team-building.jpg` - 中期团建
-- [ ] `handover.jpg` - 换届
-- [ ] `farewell.jpg` - 告别会
+- [ ] `team-building.jpg` - 团建活动
+- [ ] `club-collaboration.jpg` - 社团联动
+- [ ] `farewell.jpg` - 换届与告别会
 
-#### Gallery照片（6张）
+#### 平时支教活动照片（3张）
+- [ ] `weekly-teaching-1.jpg` - 支教活动照片1
+- [ ] `weekly-teaching-2.jpg` - 支教活动照片2
+- [ ] `weekly-teaching-3.jpg` - 支教活动照片3
+
+#### Gallery照片（5张）
 - [ ] `group-photo-1.jpg` - 团队合照
 - [ ] `teaching-moment.jpg` - 支教课堂
-- [ ] `recruitment.jpg` - 百团大战
 - [ ] `team-building.jpg` - 团建活动
-- [ ] `video-thumbnail.jpg` - 视频缩略图（JPG/PNG格式）
-- [ ] `ppt-1-thumbnail.jpg` - PPT 1缩略图（JPG/PNG格式）
-- [ ] `ppt-2-thumbnail.jpg` - PPT 2缩略图（JPG/PNG格式）
-- [ ] `ppt-3-thumbnail.jpg` - PPT 3缩略图（JPG/PNG格式）
+- [ ] `postcard.jpg` - 明信片作品
+- [ ] `virtual-character.jpg` - 虚拟人物设计
 
 #### 视频和PPT文件
-- [ ] `video.mp4` - 支教纪录片视频（MP4格式）
-- [ ] `ppt-1.pdf` - 课程设计PPT 1（转换为PDF格式）
-- [ ] `ppt-2.pdf` - 课程设计PPT 2（转换为PDF格式）
-- [ ] `ppt-3.pdf` - 课程设计PPT 3（转换为PDF格式）
+- [ ] `video-2025.mp4` + `video-2025-thumbnail.jpg` - 2025支教纪录片
+- [ ] `video-2024.mp4` + `video-2024-thumbnail.jpg` - 2024支教纪录片
+- [ ] `ppt-1.pdf` + `ppt-1-thumbnail.jpg` - 课程设计PPT 1
+- [ ] `ppt-2.pdf` + `ppt-2-thumbnail.jpg` - 课程设计PPT 2
+- [ ] `ppt-3.pdf` + `ppt-3-thumbnail.jpg` - 课程设计PPT 3
 
 **注意**：
 - 每个活动可以放置多张照片，只需按照命名规则添加即可（如`baituan-1.jpg`, `baituan-2.jpg`等）
 - **视频文件**：
   - 格式：MP4（推荐H.264编码）
-  - 文件名：`video.mp4`
-  - 位置：`images/gallery/video.mp4`
-  - 缩略图：`video-thumbnail.jpg`（视频封面截图）
+  - 文件名：`video-2025.mp4`, `video-2024.mp4`
+  - 位置：`images/gallery/`
+  - 缩略图：对应的 `video-2025-thumbnail.jpg`, `video-2024-thumbnail.jpg`
   - 点击缩略图后会在网站内直接播放视频
-  - 只支持1个视频
+  - 支持2个视频（2025和2024）
+  - **只有视频和PPT有点赞功能，照片没有点赞**
 - **PPT文件**：
   - 格式：PDF（需要先将PPT转换为PDF）
   - 文件名：`ppt-1.pdf`, `ppt-2.pdf`, `ppt-3.pdf`（支持多个PPT）
-  - 位置：`images/gallery/ppt-X.pdf`
-  - 缩略图：`ppt-X-thumbnail.jpg`（PPT首页截图）
+  - 位置：`images/gallery/`
+  - 缩略图：对应的 `ppt-X-thumbnail.jpg`
   - 点击缩略图后会在网站内直接查看PDF，并提供下载按钮
-  - 如需更多PPT，可以继续添加 `ppt-4.pdf`, `ppt-5.pdf` 等，并在代码中添加对应条目
+  - **只有视频和PPT有点赞功能，照片没有点赞**
 
 **如何将PPT转换为PDF**：
 - Windows: 打开PPT → 文件 → 另存为 → 选择PDF格式
