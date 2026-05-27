@@ -312,189 +312,200 @@ function resetQuiz() {
 
 // Gallery 功能
 const galleryData = [
+    // 团队合照 - 6张
     {
         id: 1,
-        title: '团队合照',
+        title: '团队合照 1',
         description: '支教社全体成员合影',
         category: 'photo',
         image: 'images/gallery/group-photo-1.jpg',
-        likes: 0,
         showLike: false
     },
     {
         id: 2,
-        title: '支教课堂',
-        description: '与学生们的互动瞬间',
+        title: '团队合照 2',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'images/gallery/teaching-moment.jpg',
-        likes: 0,
+        image: 'images/gallery/group-photo-2.jpg',
         showLike: false
     },
     {
         id: 3,
-        title: '团建活动',
-        description: '社员们的欢乐时光',
+        title: '团队合照 3',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'images/gallery/team-building.jpg',
-        likes: 0,
+        image: 'images/gallery/group-photo-3.jpg',
         showLike: false
     },
     {
         id: 4,
-        title: '虚拟形象 1',
-        description: '支教社吉祥物和虚拟形象设计',
+        title: '团队合照 4',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'images/gallery/virtual-character-1.jpg',
-        likes: 0,
+        image: 'images/gallery/group-photo-4.jpg',
         showLike: false
     },
     {
         id: 5,
-        title: '虚拟形象 2',
-        description: '支教社吉祥物和虚拟形象设计',
+        title: '团队合照 5',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'images/gallery/virtual-character-2.jpg',
-        likes: 0,
+        image: 'images/gallery/group-photo-5.jpg',
         showLike: false
     },
     {
         id: 6,
-        title: '虚拟形象 3',
-        description: '支教社吉祥物和虚拟形象设计',
+        title: '团队合照 6',
+        description: '支教社全体成员合影',
         category: 'photo',
-        image: 'images/gallery/virtual-character-3.jpg',
-        likes: 0,
+        image: 'images/gallery/group-photo-6.jpg',
         showLike: false
     },
+    // 支教课堂 - 7张
     {
         id: 7,
-        title: '信封和信纸 1',
-        description: '我们设计的支教主题信封和信纸',
+        title: '支教课堂 1',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/envelope-letter-1.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-1.jpg',
         showLike: false
     },
     {
         id: 8,
-        title: '信封和信纸 2',
-        description: '我们设计的支教主题信封和信纸',
+        title: '支教课堂 2',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/envelope-letter-2.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-2.jpg',
         showLike: false
     },
     {
         id: 9,
-        title: '信封和信纸 3',
-        description: '我们设计的支教主题信封和信纸',
+        title: '支教课堂 3',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/envelope-letter-3.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-3.jpg',
         showLike: false
     },
     {
         id: 10,
-        title: '明信片作品 1',
-        description: '我们设计的支教主题明信片',
+        title: '支教课堂 4',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/postcard-1.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-4.jpg',
         showLike: false
     },
     {
         id: 11,
-        title: '明信片作品 2',
-        description: '我们设计的支教主题明信片',
+        title: '支教课堂 5',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/postcard-2.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-5.jpg',
         showLike: false
     },
     {
         id: 12,
-        title: '明信片作品 3',
-        description: '我们设计的支教主题明信片',
+        title: '支教课堂 6',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/postcard-3.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-6.jpg',
         showLike: false
     },
     {
         id: 13,
-        title: '书签作品 1',
-        description: '我们设计的支教主题书签',
+        title: '支教课堂 7',
+        description: '与学生们的互动瞬间',
         category: 'photo',
-        image: 'images/gallery/bookmark-1.jpg',
-        likes: 0,
+        image: 'images/gallery/teaching-moment-7.jpg',
         showLike: false
     },
+    // 团建活动 - 4张
     {
         id: 14,
-        title: '书签作品 2',
-        description: '我们设计的支教主题书签',
+        title: '团建活动 1',
+        description: '社员们的欢乐时光',
         category: 'photo',
-        image: 'images/gallery/bookmark-2.jpg',
-        likes: 0,
+        image: 'images/gallery/team-building-1.jpg',
         showLike: false
     },
     {
         id: 15,
-        title: '书签作品 3',
-        description: '我们设计的支教主题书签',
+        title: '团建活动 2',
+        description: '社员们的欢乐时光',
         category: 'photo',
-        image: 'images/gallery/bookmark-3.jpg',
-        likes: 0,
+        image: 'images/gallery/team-building-2.jpg',
         showLike: false
     },
     {
         id: 16,
+        title: '团建活动 3',
+        description: '社员们的欢乐时光',
+        category: 'photo',
+        image: 'images/gallery/team-building-3.jpg',
+        showLike: false
+    },
+    {
+        id: 17,
+        title: '团建活动 4',
+        description: '社员们的欢乐时光',
+        category: 'photo',
+        image: 'images/gallery/team-building-4.jpg',
+        showLike: false
+    },
+    // 社团产品入口
+    {
+        id: 18,
+        title: '✨ 社团产品',
+        description: '查看我们设计的虚拟形象、信封信纸、明信片、书签等作品',
+        category: 'photo',
+        image: 'images/gallery/virtual-character-1.jpg',
+        showLike: false,
+        isProductEntry: true
+    },
+    // 视频
+    {
+        id: 19,
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
         category: 'video',
         image: 'images/gallery/video-2025-thumbnail.jpg',
         videoFile: 'images/gallery/video-2025.mp4',
-        likes: 0,
         showLike: true
     },
     {
-        id: 17,
+        id: 20,
         title: '2024支教纪录片',
         description: '记录2024年的支教故事',
         category: 'video',
         image: 'images/gallery/video-2024-thumbnail.jpg',
         videoFile: 'images/gallery/video-2024.mp4',
-        likes: 0,
         showLike: true
     },
+    // PPT
     {
-        id: 18,
+        id: 21,
         title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
         image: 'images/gallery/ppt-1-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-1.pdf',
-        likes: 0,
         showLike: true
     },
     {
-        id: 19,
+        id: 22,
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
         category: 'ppt',
         image: 'images/gallery/ppt-2-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-2.pdf',
-        likes: 0,
         showLike: true
     },
     {
-        id: 20,
+        id: 23,
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
         category: 'ppt',
         image: 'images/gallery/ppt-3-thumbnail.jpg',
         pptFile: 'images/gallery/ppt-3.pdf',
-        likes: 0,
         showLike: true
     }
 ];
@@ -545,7 +556,11 @@ function renderGallery(category = 'all') {
         item.addEventListener('click', () => {
             const id = parseInt(item.dataset.id);
             const galleryItem = galleryData.find(g => g.id === id);
-            showGalleryModal(galleryItem);
+            if (galleryItem.isProductEntry) {
+                showProductsModal();
+            } else {
+                showGalleryModal(galleryItem);
+            }
         });
     });
 }
@@ -651,6 +666,37 @@ window.addEventListener('click', (e) => {
 
 // 初始化Gallery
 renderGallery();
+
+// 社团联动 Modal 控制
+function showCollaborationModal() {
+    document.getElementById('collaboration-modal').style.display = 'block';
+}
+
+function closeCollaborationModal() {
+    document.getElementById('collaboration-modal').style.display = 'none';
+}
+
+// 社团产品 Modal 控制
+function showProductsModal() {
+    document.getElementById('products-modal').style.display = 'block';
+}
+
+function closeProductsModal() {
+    document.getElementById('products-modal').style.display = 'none';
+}
+
+// 点击modal外部关闭
+window.addEventListener('click', (e) => {
+    const collaborationModal = document.getElementById('collaboration-modal');
+    const productsModal = document.getElementById('products-modal');
+
+    if (e.target === collaborationModal) {
+        closeCollaborationModal();
+    }
+    if (e.target === productsModal) {
+        closeProductsModal();
+    }
+});
 
 // 滚动动画
 const observerOptions = {
