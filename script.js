@@ -162,10 +162,14 @@ function showSchoolModal(school) {
     document.getElementById('modal-school-name').textContent = school.name;
     const modalBody = document.getElementById('modal-school-images');
     modalBody.innerHTML = `
-        <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">
-            <strong>地址：</strong>${school.address}<br>
-            <strong>活动：</strong>${school.description}
-        </p>
+        <div style="margin-bottom: 1rem;">
+            <p style="color: var(--text-light); line-height: 1.6; margin: 0;">
+                <strong style="color: var(--primary-color);">📍 地址：</strong>${school.address}
+            </p>
+            <p style="color: var(--text-light); line-height: 1.6; margin: 0.5rem 0 0 0;">
+                <strong style="color: var(--primary-color);">🎯 活动：</strong>${school.description}
+            </p>
+        </div>
         <div class="carousel-container">
             <div class="carousel-track" id="school-carousel-track">
                 ${school.images.map((img, index) => `
@@ -886,4 +890,48 @@ document.querySelectorAll('.recruitment-card, .gallery-item, .timeline-item, .ac
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
     }
     observer.observe(el);
+});
+
+// Activity照片点击放大功能
+function initActivityPhotoClick() {
+    document.querySelectorAll('.activity-photos-grid img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.addEventListener('click', function() {
+            showActivityPhotoModal(this.src, this.alt);
+        });
+    });
+}
+
+function showActivityPhotoModal(src, alt) {
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = alt || '活动照片';
+    modalContent.innerHTML = `
+        <div class="single-photo-view">
+            <img src="${src}" alt="${alt}" style="
+                width: 100%;
+                max-height: 80vh;
+                object-fit: contain;
+                border-radius: 12px;
+            ">
+        </div>
+    `;
+
+    galleryModal.style.display = 'block';
+}
+
+// 初始化Activity照片点击
+document.addEventListener('DOMContentLoaded', () => {
+    initActivityPhotoClick();
+});
+
+// 当页面切换到Activities时重新初始化
+document.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+        setTimeout(() => {
+            initActivityPhotoClick();
+        }, 100);
+    });
 });
