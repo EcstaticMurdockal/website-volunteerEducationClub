@@ -123,57 +123,51 @@ npx http-server -p 8000
 
 ### 需要的照片清单
 
-#### 学校照片（6张）
-- [ ] `fengguang-1.jpg` - 凤光小学照片1
-- [ ] `fengguang-2.jpg` - 凤光小学照片2
-- [ ] `fengguang-3.jpg` - 凤光小学照片3
-- [ ] `beidou-1.jpg` - 北斗小学照片1
-- [ ] `beidou-2.jpg` - 北斗小学照片2
-- [ ] `beidou-3.jpg` - 北斗小学照片3
+#### 学校照片（已上传）
+- [x] `fengguang-1.jpg` - 凤光小学照片1
+- [x] `fengguang-2.jpg` - 凤光小学照片2
+- [x] `fengguang-3.jpg` - 凤光小学照片3
+- [x] `beidou-1.jpg` - 北斗小学照片1
+- [x] `beidou-2.jpg` - 北斗小学照片2
+- [x] `beidou-3.jpg` - 北斗小学照片3
 
-#### 活动照片
-- [ ] `first-class.jpg` - 第一节社课
-- [ ] `baituan.jpg` - 百团大战
-- [ ] `christmas.jpg` - 年终团建（圣诞）
-- [ ] `culture-month.jpg` - 社团文化月
-- [ ] `team-building.jpg` - 团建活动
-- [ ] `farewell.jpg` - 换届与告别会
+#### 活动照片（已上传）
+- [x] `first-class-1.jpg`, `first-class-2.jpg`, `first-class-3.jpg` - 第一节社课（3张）
+- [x] `baituan-1.jpg`, `baituan-2.jpg`, `baituan-3.jpg` - 百团大战（3张）
+- [x] `christmas-1.jpg` ~ `christmas-5.jpg` - 年终团建（5张）
+- [x] `culture-month-1.jpg`, `culture-month-2.jpg`, `culture-month-3.jpg` - 社团文化月（3张）
+- [x] `farewell-1.jpg` ~ `farewell-4.jpg` - 换届与告别会（4张）
 
-#### 社团联动照片（5个社团，分别命名）
-- [ ] `collaboration-astronomy.jpg` - 与天文社联动
-- [ ] `collaboration-volleyball.jpg` - 与排球社联动
-- [ ] `collaboration-debate.jpg` - 与辩论社联动
-- [ ] `collaboration-dance.jpg` - 与街舞社联动
-- [ ] `collaboration-art.jpg` - 与绯青书画社联动
+#### 社团联动照片（已上传）
+- [x] `collaboration-astronomy-1.jpg`, `collaboration-astronomy-2.jpg` - 天文社（2张）
+- [x] `collaboration-volleyball-1.jpg`, `collaboration-volleyball-2.jpg` - 排球社（2张）
+- [x] `collaboration-debate-1.jpg`, `collaboration-debate-2.jpg` - 辩论社（2张）
+- [x] `collaboration-dance.jpg` - 街舞社（1张）
+- [x] `collaboration-art.jpg` - 绯青书画社（1张）
 
-#### 平时支教活动照片（5张）
-- [ ] `weekly-teaching-1.jpg` - 支教活动照片1
-- [ ] `weekly-teaching-2.jpg` - 支教活动照片2
-- [ ] `weekly-teaching-3.jpg` - 支教活动照片3
-- [ ] `weekly-teaching-4.jpg` - 支教活动照片4
-- [ ] `weekly-teaching-5.jpg` - 支教活动照片5
+#### 平时支教活动照片（已上传）
+- [x] `weekly-teaching-1.jpg` ~ `weekly-teaching-5.jpg` - 支教活动（5张）
 
-#### Gallery照片 - 社团产品（每个产品3张）
-- [ ] `group-photo-1.jpg` - 团队合照
-- [ ] `teaching-moment.jpg` - 支教课堂
-- [ ] `team-building.jpg` - 团建活动
-- [ ] `virtual-character-1.jpg` - 虚拟形象1
-- [ ] `virtual-character-2.jpg` - 虚拟形象2
-- [ ] `virtual-character-3.jpg` - 虚拟形象3
-- [ ] `envelope-letter-1.jpg` - 信封和信纸1
-- [ ] `envelope-letter-2.jpg` - 信封和信纸2
-- [ ] `envelope-letter-3.jpg` - 信封和信纸3
-- [ ] `postcard-1.jpg` - 明信片作品1
-- [ ] `postcard-2.jpg` - 明信片作品2
-- [ ] `postcard-3.jpg` - 明信片作品3
-- [ ] `bookmark-1.jpg` - 书签作品1
-- [ ] `bookmark-2.jpg` - 书签作品2
-- [ ] `bookmark-3.jpg` - 书签作品3
+#### Gallery照片（已上传）
+**团队合照（6张）**
+- [x] `group-photo-1.jpg` ~ `group-photo-6.jpg`
 
-#### 社团Icon
-- [x] `icon.png` - 社团Logo图标（已上传，显示在导航栏"深圳中学支教社"前面）
+**支教课堂（7张）**
+- [x] `teaching-moment-1.jpg` ~ `teaching-moment-7.jpg`
 
-#### 视频和PPT文件
+**团建活动（4张）**
+- [x] `team-building-1.jpg` ~ `team-building-4.jpg`
+
+**社团产品（11张）**
+- [x] `virtual-character-1.jpg`, `virtual-character-2.jpg` - 虚拟形象（2张）
+- [x] `envelope-letter-1.jpg`, `envelope-letter-2.jpg` - 信封和信纸（2张）
+- [x] `postcard-1.jpg` ~ `postcard-5.jpg` - 明信片（5张）
+- [x] `bookmark-1.jpg`, `bookmark-2.jpg` - 书签（2张）
+
+#### 社团Icon（已上传）
+- [x] `icon.jpg` - 社团Logo图标
+
+#### 视频和PPT文件（待上传）
 - [ ] `video-2025.mp4` + `video-2025-thumbnail.jpg` - 2025支教纪录片
 - [ ] `video-2024.mp4` + `video-2024-thumbnail.jpg` - 2024支教纪录片
 - [ ] `ppt-1.pdf` + `ppt-1-thumbnail.jpg` - 课程设计PPT 1
@@ -217,21 +211,36 @@ npx http-server -p 8000
 - 完全可交互（拖动、缩放、滚轮缩放）
 - 自定义标记（红色经典pin + 学校emoji）
 - 悬停显示学校信息
-- 点击查看详细信息和照片（支持每所学校3张照片）
+- 点击查看详细信息和照片轮播（支持每所学校3张照片，swipe切换）
 
-### 2. 点赞系统
+### 2. 照片轮播系统
+- 地图学校照片：swipe手势切换，指示器显示当前位置
+- Gallery照片查看：点击照片全屏查看，左右箭头或swipe切换
+- 触摸友好：支持触摸滑动和鼠标拖拽
+- 流畅动画：Apple风格的过渡效果
+
+### 3. Gallery分类展示
+- **团队合照**：6张照片，点击查看轮播
+- **支教课堂**：7张照片，点击查看轮播
+- **团建活动**：4张照片，点击查看轮播
+- **社团产品**：合并入口，包含虚拟形象、信封信纸、明信片、书签
+- **视频**：2个视频（2025和2024），支持点赞
+- **PPT**：3个PPT，支持点赞和下载
+
+### 4. 点赞系统
 - 从0开始累计
 - 使用localStorage持久化
 - 每个用户只能点赞一次
 - 实时更新点赞数
+- 仅视频和PPT支持点赞
 
-### 3. 人格测试
+### 5. 人格测试
 - 16种支教人格类型
 - 20道测试题
 - 详细的结果分析
 - 天赋优势和改进建议
 
-### 4. 响应式设计
+### 6. 响应式设计
 - 移动端优化
 - 触摸手势支持
 - 自适应布局

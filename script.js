@@ -162,16 +162,125 @@ function showSchoolModal(school) {
     document.getElementById('modal-school-name').textContent = school.name;
     const modalBody = document.getElementById('modal-school-images');
     modalBody.innerHTML = `
-        <p style="color: var(--text-light); margin-bottom: 1rem; line-height: 1.6;">
+        <p style="color: var(--text-light); margin-bottom: 1.5rem; line-height: 1.6;">
             <strong>地址：</strong>${school.address}<br>
             <strong>活动：</strong>${school.description}
         </p>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            ${school.images.map(img => `<img src="${img}" alt="${school.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">`).join('')}
+        <div class="carousel-container">
+            <div class="carousel-track" id="school-carousel-track">
+                ${school.images.map((img, index) => `
+                    <div class="carousel-slide ${index === 0 ? 'active' : ''}">
+                        <img src="${img}" alt="${school.name} ${index + 1}">
+                    </div>
+                `).join('')}
+            </div>
+            ${school.images.length > 1 ? `
+                <button class="carousel-btn carousel-prev" onclick="moveSchoolCarousel(-1)">‹</button>
+                <button class="carousel-btn carousel-next" onclick="moveSchoolCarousel(1)">›</button>
+                <div class="carousel-indicators">
+                    ${school.images.map((_, index) => `
+                        <span class="indicator ${index === 0 ? 'active' : ''}" onclick="goToSchoolSlide(${index})"></span>
+                    `).join('')}
+                </div>
+            ` : ''}
         </div>
     `;
     modal.style.display = 'block';
+
+    // 初始化轮播
+    initSchoolCarousel();
 }
+
+let schoolCarouselIndex = 0;
+let schoolCarouselTouchStart = 0;
+let schoolCarouselTouchEnd = 0;
+
+function initSchoolCarousel() {
+    schoolCarouselIndex = 0;
+    const track = document.getElementById('school-carousel-track');
+    if (!track) return;
+
+    // 触摸事件
+    track.addEventListener('touchstart', (e) => {
+        schoolCarouselTouchStart = e.changedTouches[0].screenX;
+    });
+
+    track.addEventListener('touchend', (e) => {
+        schoolCarouselTouchEnd = e.changedTouches[0].screenX;
+        handleSchoolCarouselSwipe();
+    });
+
+    // 鼠标拖拽事件
+    let isDragging = false;
+    let startX = 0;
+
+    track.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        track.style.cursor = 'grabbing';
+    });
+
+    track.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+
+    track.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.cursor = 'grab';
+        const endX = e.clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+            moveSchoolCarousel(diff > 0 ? 1 : -1);
+        }
+    });
+
+    track.addEventListener('mouseleave', () => {
+        isDragging = false;
+        track.style.cursor = 'grab';
+    });
+}
+
+function handleSchoolCarouselSwipe() {
+    const diff = schoolCarouselTouchStart - schoolCarouselTouchEnd;
+    if (Math.abs(diff) > 50) {
+        moveSchoolCarousel(diff > 0 ? 1 : -1);
+    }
+}
+
+window.moveSchoolCarousel = function(direction) {
+    const slides = document.querySelectorAll('#school-carousel-track .carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+    if (slides.length === 0) return;
+
+    schoolCarouselIndex += direction;
+    if (schoolCarouselIndex < 0) schoolCarouselIndex = slides.length - 1;
+    if (schoolCarouselIndex >= slides.length) schoolCarouselIndex = 0;
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === schoolCarouselIndex);
+    });
+
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === schoolCarouselIndex);
+    });
+};
+
+window.goToSchoolSlide = function(index) {
+    const slides = document.querySelectorAll('#school-carousel-track .carousel-slide');
+    const indicators = document.querySelectorAll('.carousel-indicators .indicator');
+
+    schoolCarouselIndex = index;
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
+};
 
 closeBtn.addEventListener('click', () => {
     modal.style.display = 'none';
@@ -312,148 +421,65 @@ function resetQuiz() {
 
 // Gallery 功能
 const galleryData = [
-    // 团队合照 - 6张
+    // 团队合照入口
     {
         id: 1,
-        title: '团队合照 1',
-        description: '支教社全体成员合影',
+        title: '📸 团队合照',
+        description: '支教社全体成员合影（6张）',
         category: 'photo',
         image: 'images/gallery/group-photo-1.jpg',
-        showLike: false
+        showLike: false,
+        isGalleryEntry: true,
+        galleryType: 'group-photo',
+        images: [
+            'images/gallery/group-photo-1.jpg',
+            'images/gallery/group-photo-2.jpg',
+            'images/gallery/group-photo-3.jpg',
+            'images/gallery/group-photo-4.jpg',
+            'images/gallery/group-photo-5.jpg',
+            'images/gallery/group-photo-6.jpg'
+        ]
     },
+    // 支教课堂入口
     {
         id: 2,
-        title: '团队合照 2',
-        description: '支教社全体成员合影',
-        category: 'photo',
-        image: 'images/gallery/group-photo-2.jpg',
-        showLike: false
-    },
-    {
-        id: 3,
-        title: '团队合照 3',
-        description: '支教社全体成员合影',
-        category: 'photo',
-        image: 'images/gallery/group-photo-3.jpg',
-        showLike: false
-    },
-    {
-        id: 4,
-        title: '团队合照 4',
-        description: '支教社全体成员合影',
-        category: 'photo',
-        image: 'images/gallery/group-photo-4.jpg',
-        showLike: false
-    },
-    {
-        id: 5,
-        title: '团队合照 5',
-        description: '支教社全体成员合影',
-        category: 'photo',
-        image: 'images/gallery/group-photo-5.jpg',
-        showLike: false
-    },
-    {
-        id: 6,
-        title: '团队合照 6',
-        description: '支教社全体成员合影',
-        category: 'photo',
-        image: 'images/gallery/group-photo-6.jpg',
-        showLike: false
-    },
-    // 支教课堂 - 7张
-    {
-        id: 7,
-        title: '支教课堂 1',
-        description: '与学生们的互动瞬间',
+        title: '👨‍🏫 支教课堂',
+        description: '与学生们的互动瞬间（7张）',
         category: 'photo',
         image: 'images/gallery/teaching-moment-1.jpg',
-        showLike: false
+        showLike: false,
+        isGalleryEntry: true,
+        galleryType: 'teaching-moment',
+        images: [
+            'images/gallery/teaching-moment-1.jpg',
+            'images/gallery/teaching-moment-2.jpg',
+            'images/gallery/teaching-moment-3.jpg',
+            'images/gallery/teaching-moment-4.jpg',
+            'images/gallery/teaching-moment-5.jpg',
+            'images/gallery/teaching-moment-6.jpg',
+            'images/gallery/teaching-moment-7.jpg'
+        ]
     },
+    // 团建活动入口
     {
-        id: 8,
-        title: '支教课堂 2',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-2.jpg',
-        showLike: false
-    },
-    {
-        id: 9,
-        title: '支教课堂 3',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-3.jpg',
-        showLike: false
-    },
-    {
-        id: 10,
-        title: '支教课堂 4',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-4.jpg',
-        showLike: false
-    },
-    {
-        id: 11,
-        title: '支教课堂 5',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-5.jpg',
-        showLike: false
-    },
-    {
-        id: 12,
-        title: '支教课堂 6',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-6.jpg',
-        showLike: false
-    },
-    {
-        id: 13,
-        title: '支教课堂 7',
-        description: '与学生们的互动瞬间',
-        category: 'photo',
-        image: 'images/gallery/teaching-moment-7.jpg',
-        showLike: false
-    },
-    // 团建活动 - 4张
-    {
-        id: 14,
-        title: '团建活动 1',
-        description: '社员们的欢乐时光',
+        id: 3,
+        title: '🎉 团建活动',
+        description: '社员们的欢乐时光（4张）',
         category: 'photo',
         image: 'images/gallery/team-building-1.jpg',
-        showLike: false
-    },
-    {
-        id: 15,
-        title: '团建活动 2',
-        description: '社员们的欢乐时光',
-        category: 'photo',
-        image: 'images/gallery/team-building-2.jpg',
-        showLike: false
-    },
-    {
-        id: 16,
-        title: '团建活动 3',
-        description: '社员们的欢乐时光',
-        category: 'photo',
-        image: 'images/gallery/team-building-3.jpg',
-        showLike: false
-    },
-    {
-        id: 17,
-        title: '团建活动 4',
-        description: '社员们的欢乐时光',
-        category: 'photo',
-        image: 'images/gallery/team-building-4.jpg',
-        showLike: false
+        showLike: false,
+        isGalleryEntry: true,
+        galleryType: 'team-building',
+        images: [
+            'images/gallery/team-building-1.jpg',
+            'images/gallery/team-building-2.jpg',
+            'images/gallery/team-building-3.jpg',
+            'images/gallery/team-building-4.jpg'
+        ]
     },
     // 社团产品入口
     {
-        id: 18,
+        id: 4,
         title: '✨ 社团产品',
         description: '查看我们设计的虚拟形象、信封信纸、明信片、书签等作品',
         category: 'photo',
@@ -463,7 +489,7 @@ const galleryData = [
     },
     // 视频
     {
-        id: 19,
+        id: 5,
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
         category: 'video',
@@ -472,7 +498,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 20,
+        id: 6,
         title: '2024支教纪录片',
         description: '记录2024年的支教故事',
         category: 'video',
@@ -482,7 +508,7 @@ const galleryData = [
     },
     // PPT
     {
-        id: 21,
+        id: 7,
         title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
@@ -491,7 +517,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 22,
+        id: 8,
         title: '课程设计PPT 2',
         description: '素质拓展课程设计',
         category: 'ppt',
@@ -500,7 +526,7 @@ const galleryData = [
         showLike: true
     },
     {
-        id: 23,
+        id: 9,
         title: '课程设计PPT 3',
         description: '互动教学案例分享',
         category: 'ppt',
@@ -558,6 +584,8 @@ function renderGallery(category = 'all') {
             const galleryItem = galleryData.find(g => g.id === id);
             if (galleryItem.isProductEntry) {
                 showProductsModal();
+            } else if (galleryItem.isGalleryEntry) {
+                showGalleryCarousel(galleryItem);
             } else {
                 showGalleryModal(galleryItem);
             }
@@ -684,6 +712,142 @@ function showProductsModal() {
 function closeProductsModal() {
     document.getElementById('products-modal').style.display = 'none';
 }
+
+// Gallery轮播 Modal 控制
+let galleryCarouselIndex = 0;
+let galleryCarouselTouchStart = 0;
+let galleryCarouselTouchEnd = 0;
+let currentGalleryImages = [];
+
+function showGalleryCarousel(item) {
+    currentGalleryImages = item.images;
+    galleryCarouselIndex = 0;
+
+    const galleryModal = document.getElementById('gallery-modal');
+    const modalTitle = document.getElementById('gallery-modal-title');
+    const modalContent = document.getElementById('gallery-modal-content');
+
+    modalTitle.textContent = item.title;
+    modalContent.innerHTML = `
+        <div class="carousel-container gallery-carousel">
+            <div class="carousel-track" id="gallery-carousel-track">
+                ${item.images.map((img, index) => `
+                    <div class="carousel-slide ${index === 0 ? 'active' : ''}">
+                        <img src="${img}" alt="${item.title} ${index + 1}">
+                    </div>
+                `).join('')}
+            </div>
+            ${item.images.length > 1 ? `
+                <button class="carousel-btn carousel-prev" onclick="moveGalleryCarousel(-1)">‹</button>
+                <button class="carousel-btn carousel-next" onclick="moveGalleryCarousel(1)">›</button>
+                <div class="carousel-indicators">
+                    ${item.images.map((_, index) => `
+                        <span class="indicator ${index === 0 ? 'active' : ''}" onclick="goToGallerySlide(${index})"></span>
+                    `).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `;
+
+    galleryModal.style.display = 'block';
+    initGalleryCarousel();
+}
+
+function initGalleryCarousel() {
+    const track = document.getElementById('gallery-carousel-track');
+    if (!track) return;
+
+    // 触摸事件
+    track.addEventListener('touchstart', (e) => {
+        galleryCarouselTouchStart = e.changedTouches[0].screenX;
+    });
+
+    track.addEventListener('touchend', (e) => {
+        galleryCarouselTouchEnd = e.changedTouches[0].screenX;
+        handleGalleryCarouselSwipe();
+    });
+
+    // 鼠标拖拽事件
+    let isDragging = false;
+    let startX = 0;
+
+    track.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        startX = e.clientX;
+        track.style.cursor = 'grabbing';
+    });
+
+    track.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        e.preventDefault();
+    });
+
+    track.addEventListener('mouseup', (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.style.cursor = 'grab';
+        const endX = e.clientX;
+        const diff = startX - endX;
+        if (Math.abs(diff) > 50) {
+            moveGalleryCarousel(diff > 0 ? 1 : -1);
+        }
+    });
+
+    track.addEventListener('mouseleave', () => {
+        isDragging = false;
+        track.style.cursor = 'grab';
+    });
+
+    // 键盘导航
+    document.addEventListener('keydown', handleGalleryKeyboard);
+}
+
+function handleGalleryKeyboard(e) {
+    if (document.getElementById('gallery-modal').style.display !== 'block') return;
+    if (e.key === 'ArrowLeft') moveGalleryCarousel(-1);
+    if (e.key === 'ArrowRight') moveGalleryCarousel(1);
+    if (e.key === 'Escape') document.getElementById('gallery-close').click();
+}
+
+function handleGalleryCarouselSwipe() {
+    const diff = galleryCarouselTouchStart - galleryCarouselTouchEnd;
+    if (Math.abs(diff) > 50) {
+        moveGalleryCarousel(diff > 0 ? 1 : -1);
+    }
+}
+
+window.moveGalleryCarousel = function(direction) {
+    const slides = document.querySelectorAll('#gallery-carousel-track .carousel-slide');
+    const indicators = document.querySelectorAll('#gallery-modal-content .carousel-indicators .indicator');
+    if (slides.length === 0) return;
+
+    galleryCarouselIndex += direction;
+    if (galleryCarouselIndex < 0) galleryCarouselIndex = slides.length - 1;
+    if (galleryCarouselIndex >= slides.length) galleryCarouselIndex = 0;
+
+    slides.forEach((slide, index) => {
+        slide.classList.toggle('active', index === galleryCarouselIndex);
+    });
+
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === galleryCarouselIndex);
+    });
+};
+
+window.goToGallerySlide = function(index) {
+    const slides = document.querySelectorAll('#gallery-carousel-track .carousel-slide');
+    const indicators = document.querySelectorAll('#gallery-modal-content .carousel-indicators .indicator');
+
+    galleryCarouselIndex = index;
+
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+
+    indicators.forEach((indicator, i) => {
+        indicator.classList.toggle('active', i === index);
+    });
+};
 
 // 点击modal外部关闭
 window.addEventListener('click', (e) => {
