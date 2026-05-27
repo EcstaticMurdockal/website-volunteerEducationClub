@@ -47,11 +47,29 @@ navLinks.forEach(link => {
     });
 });
 
-// 地图功能 - 完整的交互式地图
+// 地图功能 - 使用高德地图
 // 等待页面加载完成后初始化地图
 document.addEventListener('DOMContentLoaded', function() {
     initMap();
 });
+
+// 支教学校数据
+const schools = [
+    {
+        name: '深圳市凤光小学',
+        address: '广东省深圳市罗湖区泥岗西路40号1栋',
+        coords: [114.1216, 22.5669], // 高德地图使用 [lng, lat] 格式
+        images: ['images/schools/fengguang-1.jpg', 'images/schools/fengguang-2.jpg', 'images/schools/fengguang-3.jpg'],
+        description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
+    },
+    {
+        name: '深圳市北斗小学',
+        address: '广东省深圳市罗湖区春风路1016号（文锦地铁站C口步行340米）',
+        coords: [114.1316, 22.5469],
+        images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg', 'images/schools/beidou-3.jpg'],
+        description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
+    }
+];
 
 function initMap() {
     // 检查地图容器是否存在
@@ -61,79 +79,79 @@ function initMap() {
         return;
     }
 
-    const map = L.map('map', {
-        center: [22.5569, 114.1216],
+    // 检查高德地图API是否加载
+    if (typeof AMap === 'undefined') {
+        console.error('高德地图API未加载');
+        return;
+    }
+
+    // 创建地图实例
+    const map = new AMap.Map('map', {
         zoom: 13,
-        zoomControl: true,
-        scrollWheelZoom: true,
-        dragging: true,
-        touchZoom: true,
+        center: [114.1216, 22.5569], // 深圳罗湖区中心
+        viewMode: '2D',
+        scrollWheel: true,
+        dragEnable: true,
+        zoomEnable: true,
         doubleClickZoom: true,
-        boxZoom: true,
-        keyboard: true,
-        attributionControl: true
-    });
-
-    // 使用更清晰的地图样式
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-        maxZoom: 19,
-        minZoom: 11
-    }).addTo(map);
-
-    // 添加缩放控制到右下角
-    map.zoomControl.setPosition('bottomright');
-
-    // 支教学校数据
-    const schools = [
-        {
-            name: '深圳市凤光小学',
-            address: '广东省深圳市罗湖区泥岗西路40号1栋',
-            coords: [22.5669, 114.1216],
-            images: ['images/schools/fengguang-1.jpg', 'images/schools/fengguang-2.jpg'],
-            description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
-        },
-        {
-            name: '深圳市北斗小学',
-            address: '广东省深圳市罗湖区春风路1016号（文锦地铁站C口步行340米）',
-            coords: [22.5469, 114.1316],
-            images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg'],
-            description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
-        }
-    ];
-
-    // 创建自定义图标
-    const customIcon = L.divIcon({
-        className: 'custom-marker',
-        html: '<div class="marker-pin"></div><div class="marker-icon">🏫</div>',
-        iconSize: [30, 42],
-        iconAnchor: [15, 42],
-        popupAnchor: [0, -42]
+        keyboardEnable: true,
+        touchZoom: true
     });
 
     // 添加学校标记
     schools.forEach(school => {
-        const marker = L.marker(school.coords, { icon: customIcon }).addTo(map);
-
-        // 创建弹窗内容
-        const popupContent = `
-            <div class="map-popup">
-                <h3 class="popup-title">${school.name}</h3>
-                <p class="popup-address">📍 ${school.address}</p>
-                <p class="popup-description">${school.description}</p>
-                <button class="popup-button" onclick="showSchoolDetails('${school.name}')">查看详情</button>
-            </div>
-        `;
-
-        marker.bindPopup(popupContent, {
-            maxWidth: 300,
-            className: 'custom-popup'
+        // 创建标记 - 红色经典款
+        const marker = new AMap.Marker({
+            position: school.coords,
+            title: school.name,
+            icon: new AMap.Icon({
+                size: new AMap.Size(40, 50),
+                image: 'data:image/svg+xml;base64,' + btoa(`
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" viewBox="0 0 40 50">
+                        <path d="M20 0C11.716 0 5 6.716 5 15c0 8.284 15 35 15 35s15-26.716 15-35c0-8.284-6.716-15-15-15z" fill="#EA4335"/>
+                        <circle cx="20" cy="15" r="8" fill="white"/>
+                        <text x="20" y="20" font-size="12" text-anchor="middle" fill="#EA4335">🏫</text>
+                    </svg>
+                `),
+                imageSize: new AMap.Size(40, 50)
+            }),
+            offset: new AMap.Pixel(-20, -50)
         });
 
-        // 添加悬停效果
+        // 创建信息窗体
+        const infoWindow = new AMap.InfoWindow({
+            content: `
+                <div class="map-popup" style="padding: 15px; min-width: 250px;">
+                    <h3 style="margin: 0 0 10px 0; color: var(--primary-color); font-size: 1.1rem;">${school.name}</h3>
+                    <p style="margin: 5px 0; color: #666; font-size: 0.9rem;">📍 ${school.address}</p>
+                    <p style="margin: 10px 0; color: #333; line-height: 1.5;">${school.description}</p>
+                    <button onclick="showSchoolDetails('${school.name}')" style="
+                        background: var(--primary-color);
+                        color: white;
+                        border: none;
+                        padding: 8px 16px;
+                        border-radius: 6px;
+                        cursor: pointer;
+                        font-size: 0.9rem;
+                        margin-top: 10px;
+                        transition: all 0.3s ease;
+                    ">查看详情</button>
+                </div>
+            `,
+            offset: new AMap.Pixel(0, -50)
+        });
+
+        // 点击标记显示信息窗体
+        marker.on('click', function() {
+            infoWindow.open(map, marker.getPosition());
+        });
+
+        // 鼠标悬停显示信息窗体
         marker.on('mouseover', function() {
-            this.openPopup();
+            infoWindow.open(map, marker.getPosition());
         });
+
+        map.add(marker);
     });
 
     // 全局函数用于显示学校详情
@@ -143,11 +161,6 @@ function initMap() {
             showSchoolModal(school);
         }
     };
-
-    // 确保地图正确渲染
-    setTimeout(() => {
-        map.invalidateSize();
-    }, 100);
 }
 
 // 模态框功能

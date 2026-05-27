@@ -123,11 +123,13 @@ npx http-server -p 8000
 
 ### 需要的照片清单
 
-#### 学校照片（4张）
+#### 学校照片（6张）
 - [ ] `fengguang-1.jpg` - 凤光小学照片1
 - [ ] `fengguang-2.jpg` - 凤光小学照片2
+- [ ] `fengguang-3.jpg` - 凤光小学照片3
 - [ ] `beidou-1.jpg` - 北斗小学照片1
 - [ ] `beidou-2.jpg` - 北斗小学照片2
+- [ ] `beidou-3.jpg` - 北斗小学照片3
 
 #### 活动照片（7张）
 - [ ] `first-class.jpg` - 第一节社课
@@ -143,16 +145,21 @@ npx http-server -p 8000
 - [ ] `teaching-moment.jpg` - 支教课堂
 - [ ] `recruitment.jpg` - 百团大战
 - [ ] `team-building.jpg` - 团建活动
-- [ ] `video-thumbnail.jpg` - 视频缩略图
-- [ ] `ppt-thumbnail.jpg` - PPT缩略图
+- [ ] `video-thumbnail.jpg` - 视频缩略图（JPG/PNG格式）
+- [ ] `ppt-thumbnail.jpg` - PPT缩略图（JPG/PNG格式）
 
-**注意**：每个活动可以放置多张照片，只需按照命名规则添加即可（如`baituan-1.jpg`, `baituan-2.jpg`等）
+**注意**：
+- 每个活动可以放置多张照片，只需按照命名规则添加即可（如`baituan-1.jpg`, `baituan-2.jpg`等）
+- **PPT和视频**：Gallery中只需要上传**缩略图**（JPG/PNG格式），不需要上传原始PPT或视频文件
+  - `video-thumbnail.jpg` - 视频的封面截图
+  - `ppt-thumbnail.jpg` - PPT的首页截图或代表性页面截图
+  - 点击缩略图后会显示大图，您可以在描述中添加B站链接或其他观看方式
 
 ## 🛠️ 技术栈
 
 - **前端框架**：原生HTML/CSS/JavaScript
-- **地图库**：Leaflet.js
-- **地图数据**：OpenStreetMap
+- **地图库**：高德地图 JavaScript API v1.4.15
+- **地图数据**：高德地图
 - **图标**：Emoji + 自定义SVG
 - **字体**：系统默认字体栈
 
@@ -160,9 +167,9 @@ npx http-server -p 8000
 
 ### 1. 交互式地图
 - 完全可交互（拖动、缩放、滚轮缩放）
-- 自定义标记（绿色pin + 学校emoji）
+- 自定义标记（红色经典pin + 学校emoji）
 - 悬停显示学校信息
-- 点击查看详细信息和照片
+- 点击查看详细信息和照片（支持每所学校3张照片）
 
 ### 2. 点赞系统
 - 从0开始累计
