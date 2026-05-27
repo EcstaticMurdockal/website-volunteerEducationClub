@@ -33,6 +33,14 @@ navLinks.forEach(link => {
         navLinks.forEach(l => l.classList.remove('active'));
         link.classList.add('active');
 
+        // 关闭所有模态框
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.style.display = 'none';
+        });
+        if (document.getElementById('gallery-modal')) {
+            document.getElementById('gallery-modal').style.display = 'none';
+        }
+
         // 切换页面
         document.querySelectorAll('.section').forEach(section => {
             section.classList.remove('active');
@@ -44,6 +52,11 @@ navLinks.forEach(link => {
 
         // 滚动到顶部
         window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        // 重新初始化Activity照片点击
+        setTimeout(() => {
+            initActivityPhotoClick();
+        }, 100);
     });
 });
 
@@ -162,15 +175,15 @@ function showSchoolModal(school) {
     document.getElementById('modal-school-name').textContent = school.name;
     const modalBody = document.getElementById('modal-school-images');
     modalBody.innerHTML = `
-        <div style="margin-bottom: 1rem;">
-            <p style="color: var(--text-light); line-height: 1.6; margin: 0;">
+        <div style="margin-bottom: 1.5rem;">
+            <p style="color: var(--text-light); line-height: 1.8; margin: 0.5rem 0; font-size: 1rem;">
                 <strong style="color: var(--primary-color);">📍 地址：</strong>${school.address}
             </p>
-            <p style="color: var(--text-light); line-height: 1.6; margin: 0.5rem 0 0 0;">
+            <p style="color: var(--text-light); line-height: 1.8; margin: 0.5rem 0; font-size: 1rem;">
                 <strong style="color: var(--primary-color);">🎯 活动：</strong>${school.description}
             </p>
         </div>
-        <div class="carousel-container">
+        <div class="carousel-container school-carousel">
             <div class="carousel-track" id="school-carousel-track">
                 ${school.images.map((img, index) => `
                     <div class="carousel-slide ${index === 0 ? 'active' : ''}">
@@ -925,13 +938,4 @@ function showActivityPhotoModal(src, alt) {
 // 初始化Activity照片点击
 document.addEventListener('DOMContentLoaded', () => {
     initActivityPhotoClick();
-});
-
-// 当页面切换到Activities时重新初始化
-document.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        setTimeout(() => {
-            initActivityPhotoClick();
-        }, 100);
-    });
 });

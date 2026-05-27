@@ -306,7 +306,7 @@ button:active, .btn-primary:active, .btn-secondary:active {
 
 #map {
     height: 450px;
-    max-width: 1200px;
+    max-width: 900px;
     margin: 0 auto;
     border-radius: 20px;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
@@ -493,10 +493,10 @@ button:active, .btn-primary:active, .btn-secondary:active {
 }
 
 #modal-school-images {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 1rem;
-    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 0;
 }
 
 #modal-school-images img {
@@ -1539,7 +1539,7 @@ button:active, .btn-primary:active, .btn-secondary:active {
 
 /* Gallery轮播特殊样式 */
 .gallery-carousel .carousel-track {
-    height: 650px;
+    height: 750px;
     background: linear-gradient(135deg, var(--accent-color) 0%, var(--primary-color) 100%);
 }
 
