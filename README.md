@@ -34,33 +34,41 @@
 
 ```
 website-vEducation/
-├── index.html              # 主页面
-├── styles.css              # 样式文件
-├── script.js               # 主要JavaScript
-├── quiz.js                 # 人格测试逻辑
+├── index.html              # 主页面（包含所有section）
+├── styles.css              # 样式文件（1500+行，包含轮播、动画等）
+├── script.js               # 主要JavaScript（地图、Gallery、轮播等）
+├── quiz.js                 # 人格测试逻辑（16人格系统）
 ├── images/                 # 图片资源目录
-│   ├── schools/           # 学校照片
-│   │   ├── fengguang-1.jpg
-│   │   ├── fengguang-2.jpg
-│   │   ├── beidou-1.jpg
-│   │   └── beidou-2.jpg
-│   ├── activities/        # 活动照片
-│   │   ├── first-class.jpg
-│   │   ├── baituan.jpg
-│   │   ├── christmas.jpg
-│   │   ├── culture-month.jpg
-│   │   ├── mid-team-building.jpg
-│   │   ├── handover.jpg
-│   │   └── farewell.jpg
-│   └── gallery/           # Gallery展示照片
-│       ├── group-photo-1.jpg
-│       ├── teaching-moment.jpg
-│       ├── recruitment.jpg
-│       ├── team-building.jpg
-│       ├── video-thumbnail.jpg
-│       └── ppt-thumbnail.jpg
-├── README.md              # 项目说明
-└── PROJECT_STATUS.md      # 项目状态报告
+│   ├── icon.jpg           # 社团Logo
+│   ├── schools/           # 学校照片（6张）
+│   │   ├── fengguang-1.jpg ~ fengguang-3.jpg
+│   │   └── beidou-1.jpg ~ beidou-3.jpg
+│   ├── activities/        # 活动照片（31张）
+│   │   ├── first-class-1.jpg ~ first-class-3.jpg
+│   │   ├── baituan-1.jpg ~ baituan-3.jpg
+│   │   ├── christmas-1.jpg ~ christmas-5.jpg
+│   │   ├── culture-month-1.jpg ~ culture-month-3.jpg
+│   │   ├── farewell-1.jpg ~ farewell-4.jpg
+│   │   ├── collaboration-astronomy-1.jpg, collaboration-astronomy-2.jpg
+│   │   ├── collaboration-volleyball-1.jpg, collaboration-volleyball-2.jpg
+│   │   ├── collaboration-debate-1.jpg, collaboration-debate-2.jpg
+│   │   ├── collaboration-dance.jpg
+│   │   ├── collaboration-art.jpg
+│   │   └── weekly-teaching-1.jpg ~ weekly-teaching-5.jpg
+│   └── gallery/           # Gallery展示照片（28张）
+│       ├── group-photo-1.jpg ~ group-photo-6.jpg
+│       ├── teaching-moment-1.jpg ~ teaching-moment-7.jpg
+│       ├── team-building-1.jpg ~ team-building-4.jpg
+│       ├── virtual-character-1.jpg, virtual-character-2.jpg
+│       ├── envelope-letter-1.jpg, envelope-letter-2.jpg
+│       ├── postcard-1.jpg ~ postcard-5.jpg
+│       ├── bookmark-1.jpg, bookmark-2.jpg
+│       ├── video-2025.mp4, video-2025-thumbnail.jpg (待上传)
+│       ├── video-2024.mp4, video-2024-thumbnail.jpg (待上传)
+│       └── ppt-1.pdf ~ ppt-3.pdf + thumbnails (待上传)
+├── README.md              # 项目说明文档
+├── CHANGES_SUMMARY.md     # 更改总结
+└── UPDATE_2026-05-27.md   # 最新更新说明
 ```
 
 ## 🚀 快速开始
@@ -235,10 +243,36 @@ npx http-server -p 8000
 - 仅视频和PPT支持点赞
 
 ### 5. 人格测试
-- 16种支教人格类型
-- 20道测试题
-- 详细的结果分析
-- 天赋优势和改进建议
+- **16种支教人格类型**：基于MBTI理论改编的支教人格系统
+- **20道精心设计的测试题**：涵盖教学风格、沟通方式、问题解决等维度
+- **详细的结果分析**：
+  - 人格名称和emoji图标
+  - 核心特质描述
+  - 天赋优势分析（3-4条）
+  - 改进建议（3-4条）
+- **人格类型示例**：
+  - 🌟 启发导师型：善于激发学生潜能
+  - 📚 知识传授型：系统化教学专家
+  - 🎨 创意引导型：注重创新思维培养
+  - 🤝 陪伴成长型：关注学生情感需求
+  - 🎯 目标驱动型：注重学习成果
+  - 🌈 多元发展型：培养综合素质
+  - 💡 启蒙探索型：激发好奇心
+  - 🎭 互动体验型：重视课堂参与
+  - 📖 经典传承型：传统教学方法
+  - 🔬 实践探究型：动手实验教学
+  - 🎪 趣味引导型：寓教于乐
+  - 🏆 竞赛激励型：通过竞争促进学习
+  - 🌱 耐心培育型：循序渐进教学
+  - 🎵 艺术熏陶型：美育教学
+  - 🧩 逻辑思维型：培养分析能力
+  - 🌍 视野拓展型：开阔学生眼界
+- **测试流程**：
+  1. 点击"开始测试"按钮
+  2. 回答20道选择题（每题4个选项）
+  3. 进度条实时显示完成度
+  4. 自动计算并展示结果
+  5. 可重新测试
 
 ### 6. 响应式设计
 - 移动端优化
