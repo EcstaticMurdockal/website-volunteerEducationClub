@@ -100,22 +100,13 @@ function initMap() {
 
     // 添加学校标记
     schools.forEach(school => {
-        // 创建标记 - 红色经典款
+        // 创建标记 - 使用简单的红色标记
         const marker = new AMap.Marker({
             position: school.coords,
             title: school.name,
-            icon: new AMap.Icon({
-                size: new AMap.Size(40, 50),
-                image: 'data:image/svg+xml;base64,' + btoa(`
-                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="50" viewBox="0 0 40 50">
-                        <path d="M20 0C11.716 0 5 6.716 5 15c0 8.284 15 35 15 35s15-26.716 15-35c0-8.284-6.716-15-15-15z" fill="#EA4335"/>
-                        <circle cx="20" cy="15" r="8" fill="white"/>
-                        <text x="20" y="20" font-size="12" text-anchor="middle" fill="#EA4335">🏫</text>
-                    </svg>
-                `),
-                imageSize: new AMap.Size(40, 50)
-            }),
-            offset: new AMap.Pixel(-20, -50)
+            // 使用高德地图默认红色标记
+            content: '<div style="background: #EA4335; width: 30px; height: 30px; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); border: 3px solid white; box-shadow: 0 2px 8px rgba(0,0,0,0.3);"><div style="transform: rotate(45deg); font-size: 16px; text-align: center; line-height: 24px;">🏫</div></div>',
+            offset: new AMap.Pixel(-15, -30)
         });
 
         // 创建信息窗体
@@ -364,11 +355,29 @@ const galleryData = [
     },
     {
         id: 6,
-        title: '课程设计PPT',
+        title: '课程设计PPT 1',
         description: '创新教学方法分享',
         category: 'ppt',
-        image: 'images/gallery/ppt-thumbnail.jpg',
-        pptFile: 'images/gallery/ppt.pdf', // PPT转PDF文件路径
+        image: 'images/gallery/ppt-1-thumbnail.jpg',
+        pptFile: 'images/gallery/ppt-1.pdf',
+        likes: 0
+    },
+    {
+        id: 7,
+        title: '课程设计PPT 2',
+        description: '素质拓展课程设计',
+        category: 'ppt',
+        image: 'images/gallery/ppt-2-thumbnail.jpg',
+        pptFile: 'images/gallery/ppt-2.pdf',
+        likes: 0
+    },
+    {
+        id: 8,
+        title: '课程设计PPT 3',
+        description: '互动教学案例分享',
+        category: 'ppt',
+        image: 'images/gallery/ppt-3-thumbnail.jpg',
+        pptFile: 'images/gallery/ppt-3.pdf',
         likes: 0
     }
 ];

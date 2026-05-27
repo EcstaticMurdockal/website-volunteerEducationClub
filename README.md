@@ -146,11 +146,15 @@ npx http-server -p 8000
 - [ ] `recruitment.jpg` - 百团大战
 - [ ] `team-building.jpg` - 团建活动
 - [ ] `video-thumbnail.jpg` - 视频缩略图（JPG/PNG格式）
-- [ ] `ppt-thumbnail.jpg` - PPT缩略图（JPG/PNG格式）
+- [ ] `ppt-1-thumbnail.jpg` - PPT 1缩略图（JPG/PNG格式）
+- [ ] `ppt-2-thumbnail.jpg` - PPT 2缩略图（JPG/PNG格式）
+- [ ] `ppt-3-thumbnail.jpg` - PPT 3缩略图（JPG/PNG格式）
 
 #### 视频和PPT文件
 - [ ] `video.mp4` - 支教纪录片视频（MP4格式）
-- [ ] `ppt.pdf` - 课程设计PPT（转换为PDF格式）
+- [ ] `ppt-1.pdf` - 课程设计PPT 1（转换为PDF格式）
+- [ ] `ppt-2.pdf` - 课程设计PPT 2（转换为PDF格式）
+- [ ] `ppt-3.pdf` - 课程设计PPT 3（转换为PDF格式）
 
 **注意**：
 - 每个活动可以放置多张照片，只需按照命名规则添加即可（如`baituan-1.jpg`, `baituan-2.jpg`等）
@@ -160,12 +164,14 @@ npx http-server -p 8000
   - 位置：`images/gallery/video.mp4`
   - 缩略图：`video-thumbnail.jpg`（视频封面截图）
   - 点击缩略图后会在网站内直接播放视频
+  - 只支持1个视频
 - **PPT文件**：
   - 格式：PDF（需要先将PPT转换为PDF）
-  - 文件名：`ppt.pdf`
-  - 位置：`images/gallery/ppt.pdf`
-  - 缩略图：`ppt-thumbnail.jpg`（PPT首页截图）
+  - 文件名：`ppt-1.pdf`, `ppt-2.pdf`, `ppt-3.pdf`（支持多个PPT）
+  - 位置：`images/gallery/ppt-X.pdf`
+  - 缩略图：`ppt-X-thumbnail.jpg`（PPT首页截图）
   - 点击缩略图后会在网站内直接查看PDF，并提供下载按钮
+  - 如需更多PPT，可以继续添加 `ppt-4.pdf`, `ppt-5.pdf` 等，并在代码中添加对应条目
 
 **如何将PPT转换为PDF**：
 - Windows: 打开PPT → 文件 → 另存为 → 选择PDF格式
