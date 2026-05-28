@@ -568,9 +568,9 @@ const galleryData = [
     {
         id: 5,
         title: '🎬 宣传视频',
-        description: '查看支教纪录片和宣传视频（2个）',
+        description: '查看支教纪录片',
         category: 'video',
-        image: 'images/gallery/video-2025-thumbnail.jpg',
+        image: 'images/gallery/video-2025-thumbnail.png',
         showLike: false,
         isVideoEntry: true
     },
@@ -592,15 +592,8 @@ const videoData = [
         id: 'video-1',
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
-        image: 'images/gallery/video-2025-thumbnail.jpg',
+        image: 'images/gallery/video-2025-thumbnail.png',
         videoFile: 'images/gallery/video-2025.mp4'
-    },
-    {
-        id: 'video-2',
-        title: '2024支教纪录片',
-        description: '记录2024年的支教故事',
-        image: 'images/gallery/video-2024-thumbnail.jpg',
-        videoFile: 'images/gallery/video-2024.mp4'
     }
 ];
 
