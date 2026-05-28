@@ -568,9 +568,9 @@ const galleryData = [
     {
         id: 5,
         title: '🎬 宣传视频',
-        description: '查看支教纪录片',
+        description: '在B站观看支教纪录片',
         category: 'video',
-        image: 'images/gallery/video-2025-thumbnail.png',
+        image: 'images/gallery/group-photo-1.jpg',
         showLike: false,
         isVideoEntry: true
     },
@@ -586,14 +586,21 @@ const galleryData = [
     }
 ];
 
-// 视频数据
+// 视频数据（B站链接）
 const videoData = [
     {
         id: 'video-1',
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
-        image: 'images/gallery/video-2025-thumbnail.png',
-        videoFile: 'images/gallery/video-2025.mp4'
+        image: 'images/gallery/group-photo-1.jpg',
+        biliUrl: 'https://www.bilibili.com/video/BV1eGgtzLEuK/'
+    },
+    {
+        id: 'video-2',
+        title: '2024支教纪录片',
+        description: '记录2024年的支教故事',
+        image: 'images/gallery/group-photo-2.jpg',
+        biliUrl: 'https://www.bilibili.com/video/BV1RoWSenEi5/'
     }
 ];
 
@@ -851,35 +858,13 @@ function showPPTListModal() {
     galleryModal.style.display = 'block';
 }
 
-// 显示单个视频
+// 显示单个视频（跳转到B站）
 window.showVideoModal = function(videoId) {
     const video = videoData.find(v => v.id === videoId);
     if (!video) return;
 
-    const galleryModal = document.getElementById('gallery-modal');
-    const modalTitle = document.getElementById('gallery-modal-title');
-    const modalContent = document.getElementById('gallery-modal-content');
-
-    modalTitle.textContent = video.title;
-    modalContent.innerHTML = `
-        <video controls style="width: 100%; max-height: 50vh; border-radius: 8px; background: #000;">
-            <source src="${video.videoFile}" type="video/mp4">
-            您的浏览器不支持视频播放。
-        </video>
-        <p style="margin-top: 1rem; color: var(--text-light);">${video.description}</p>
-        <button onclick="showVideoListModal()" style="
-            margin-top: 1rem;
-            padding: 10px 20px;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        ">← 返回视频列表</button>
-    `;
-
-    galleryModal.style.display = 'block';
+    // 直接在新标签页打开B站视频
+    window.open(video.biliUrl, '_blank');
 };
 
 // 显示单个PPT
