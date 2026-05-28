@@ -592,14 +592,14 @@ const videoData = [
         id: 'video-1',
         title: '2025支教纪录片',
         description: '记录2025年的支教故事',
-        image: 'images/gallery/group-photo-1.jpg',
+        image: 'images/gallery/video-startpage.png',
         biliUrl: 'https://www.bilibili.com/video/BV1eGgtzLEuK/'
     },
     {
         id: 'video-2',
         title: '2024支教纪录片',
         description: '记录2024年的支教故事',
-        image: 'images/gallery/group-photo-2.jpg',
+        image: 'images/gallery/video-startpage.png',
         biliUrl: 'https://www.bilibili.com/video/BV1RoWSenEi5/'
     }
 ];
