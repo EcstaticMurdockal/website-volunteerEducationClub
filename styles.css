@@ -445,9 +445,9 @@ button:active, .btn-primary:active, .btn-secondary:active {
 .modal-content {
     background: white;
     margin: 5% auto;
-    padding: 2rem;
-    width: 85%;
-    max-width: 700px;
+    padding: 1.5rem;
+    width: 80%;
+    max-width: 650px;
     border-radius: 20px;
     position: relative;
     animation: modalSlideUp 0.4s var(--transition-smooth);
@@ -1486,7 +1486,7 @@ button:active, .btn-primary:active, .btn-secondary:active {
 
 /* 学校轮播确保图片完整显示不裁剪 */
 .school-carousel .carousel-track {
-    height: 400px;
+    height: 280px;
     background: var(--bg-light);
 }
 
@@ -1592,7 +1592,7 @@ button:active, .btn-primary:active, .btn-secondary:active {
     }
 
     .school-carousel .carousel-track {
-        height: 300px;
+        height: 220px;
     }
 
     .gallery-carousel .carousel-track {
