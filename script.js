@@ -570,7 +570,7 @@ const galleryData = [
         title: '🎬 宣传视频',
         description: '在B站观看支教纪录片',
         category: 'video',
-        image: 'images/gallery/group-photo-1.jpg',
+        image: 'images/gallery/video-startpage.png',
         showLike: false,
         isVideoEntry: true
     },
