@@ -396,15 +396,75 @@ function showResult() {
     quizContainer.style.display = 'none';
     quizResult.style.display = 'block';
 
-    const { type, scores } = calculatePersonality(userAnswers);
+    const { type, scores, percentages } = calculatePersonality(userAnswers);
     const result = personalityTypes[type];
 
     document.getElementById('result-type').innerHTML = `
         <div style="font-size: 4rem; margin-bottom: 1rem;">${result.icon}</div>
         <div style="font-size: 2.5rem; font-weight: 700; color: var(--primary-color); margin-bottom: 1rem;">${result.title}</div>
+        <div style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 0.5rem;">人格类型：${type}</div>
+        <div style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 2rem;">${result.dimensions}</div>
     `;
     document.getElementById('result-content').innerHTML = `
-        <p style="font-size: 1.2rem; margin-bottom: 3rem; line-height: 1.8; color: var(--text-dark); font-weight: 500;">${result.description}</p>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; line-height: 1.8; color: var(--text-dark); font-weight: 500;">${result.description}</p>
+
+        <div class="result-section">
+            <h4>📊 你的维度倾向</h4>
+            <div style="margin-top: 1.5rem;">
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">教学风格</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">${percentages.SF >= 50 ? '结构化' : '灵活'} ${Math.max(percentages.SF, 100 - percentages.SF)}%</span>
+                    </div>
+                    <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: ${percentages.SF}%; transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <span>结构化(S)</span>
+                        <span>灵活(F)</span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">互动方式</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">${percentages.GA >= 50 ? '引导' : '陪伴'} ${Math.max(percentages.GA, 100 - percentages.GA)}%</span>
+                    </div>
+                    <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: ${percentages.GA}%; transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <span>引导(G)</span>
+                        <span>陪伴(A)</span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">关注点</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">${percentages.KE >= 50 ? '知识' : '情感'} ${Math.max(percentages.KE, 100 - percentages.KE)}%</span>
+                    </div>
+                    <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: ${percentages.KE}%; transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <span>知识(K)</span>
+                        <span>情感(E)</span>
+                    </div>
+                </div>
+                <div style="margin-bottom: 1.5rem;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                        <span style="font-weight: 600;">行动方式</span>
+                        <span style="color: var(--primary-color); font-weight: 600;">${percentages.PI >= 50 ? '计划' : '即兴'} ${Math.max(percentages.PI, 100 - percentages.PI)}%</span>
+                    </div>
+                    <div style="background: #e0e0e0; height: 8px; border-radius: 4px; overflow: hidden;">
+                        <div style="background: linear-gradient(90deg, var(--primary-color), var(--accent-color)); height: 100%; width: ${percentages.PI}%; transition: width 0.5s;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; margin-top: 0.3rem; font-size: 0.9rem; color: var(--text-secondary);">
+                        <span>计划(P)</span>
+                        <span>即兴(I)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="result-section">
             <h4>✨ 你的天赋优势</h4>
