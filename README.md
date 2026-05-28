@@ -63,8 +63,7 @@ website-vEducation/
 │       ├── envelope-letter-1.jpg, envelope-letter-2.jpg
 │       ├── postcard-1.jpg ~ postcard-5.jpg
 │       ├── bookmark-1.jpg, bookmark-2.jpg
-│       ├── video-2025.mp4, video-2025-thumbnail.jpg (待上传)
-│       ├── video-2024.mp4, video-2024-thumbnail.jpg (待上传)
+|       ├── video-startpage.png
 │       └── ppt-1.pdf ~ ppt-3.pdf + thumbnails (待上传)
 ├── README.md              # 项目说明文档
 ├── CHANGES_SUMMARY.md     # 更改总结
