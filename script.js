@@ -81,6 +81,13 @@ const schools = [
         coords: [114.1316, 22.5469],
         images: ['images/schools/beidou-1.jpg', 'images/schools/beidou-2.jpg', 'images/schools/beidou-3.jpg'],
         description: '每周六开展支教活动，涵盖多学科辅导和兴趣课程'
+    },
+    {
+        name: '侨香实验学校',
+        address: '广东省深圳市罗湖区金湖路17号（地铁9号线泥岗站C出口）',
+        coords: [114.1266, 22.5619],
+        images: ['images/schools/qiaoxiang-1.jpg', 'images/schools/qiaoxiang-2.jpg', 'images/schools/qiaoxiang-3.jpg'],
+        description: '定期开展支教活动，为学生提供课业辅导和素质拓展课程'
     }
 ];
 
